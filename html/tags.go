@@ -1,90 +1,125 @@
 package html
 
-import (
-	"fmt"
-	"strings"
+import "fmt"
+
+const (
+	html    = "html"
+	title   = "title"
+	body    = "body"
+	head    = "head"
+	div     = "div"
+	p       = "p"
+	meta    = "meta"
+	link    = "link"
+	script  = "script"
+	a       = "a"
+	nav     = "nav"
+	span    = "span"
+	section = "section"
+	img     = "img"
+	button  = "button"
 )
 
 type Attribute struct {
 	Name, Val string
+	IsBool    bool
 }
 
-func Attributes(attrs ...Attribute) []Attribute {
+func Attrs(attrs ...Attribute) []Attribute {
 	return attrs
 }
 
 type Element struct {
-	Tag        string
-	Attributes []Attribute
-	Elements   []Element
-	Text       string
+	Tag           string
+	Attributes    []Attribute
+	Elements      []Element
+	Text          string
+	IsSelfClosing bool
 }
 
 func Els(els ...Element) []Element {
 	return els
 }
 
-func renderElements(els []Element) string {
-	var renderedEls []string
-
-	for _, el := range els {
-		renderedEls = append(
-			renderedEls,
-			renderElement(el),
-		)
+func basicTag(tag string, attrs []Attribute, elements []Element) Element {
+	return Element{
+		Tag:        tag,
+		Elements:   elements,
+		Attributes: attrs,
 	}
-
-	return strings.Join(renderedEls, "")
 }
 
-var Render = renderElement
-
-func renderElement(el Element) string {
-	if el.Tag == "text" {
-		return el.Text
+func selfClosingTag(tag string, attrs []Attribute) Element {
+	return Element{
+		Tag:           tag,
+		Attributes:    attrs,
+		IsSelfClosing: true,
 	}
-
-	return fmt.Sprintf(
-		"<%s %s>%s</%s>",
-		el.Tag,
-		renderAttrs(el.Attributes),
-		renderElements(el.Elements),
-		el.Tag,
-	)
-}
-
-func renderAttrs(attrs []Attribute) string {
-	var renderedAttrs []string
-
-	for _, attr := range attrs {
-		renderedAttrs = append(
-			renderedAttrs,
-			fmt.Sprintf(`%s="%s"`, attr.Name, attr.Val),
-		)
-	}
-
-	return strings.Join(renderedAttrs, " ")
 }
 
 func Div(attrs []Attribute, elements []Element) Element {
-	return Element{
-		Tag:        "div",
-		Elements:   elements,
-		Attributes: attrs,
-	}
+	return basicTag(div, attrs, elements)
 }
 
 func P(attrs []Attribute, elements []Element) Element {
+	return basicTag(p, attrs, elements)
+}
+
+func A(attrs []Attribute, elements []Element) Element {
+	return basicTag(a, attrs, elements)
+}
+
+func Span(attrs []Attribute, elements []Element) Element {
+	return basicTag(span, attrs, elements)
+}
+
+func Section(attrs []Attribute, elements []Element) Element {
+	return basicTag(section, attrs, elements)
+}
+
+func Img(attrs []Attribute) Element {
+	return selfClosingTag(img, attrs)
+}
+
+func Nav(attrs []Attribute, elements []Element) Element {
+	return basicTag(nav, attrs, elements)
+}
+
+func Html(attrs []Attribute, elements []Element) Element {
+	return basicTag(html, attrs, elements)
+}
+
+func Head(attrs []Attribute, elements []Element) Element {
+	return basicTag(head, attrs, elements)
+}
+
+func Title(attrs []Attribute, elements []Element) Element {
+	return basicTag(title, attrs, elements)
+}
+
+func Meta(attrs []Attribute) Element {
+	return selfClosingTag(meta, attrs)
+}
+
+func Body(attrs []Attribute, elements []Element) Element {
+	return basicTag(body, attrs, elements)
+}
+
+func Link(attrs []Attribute) Element {
+	return selfClosingTag(link, attrs)
+}
+
+func Script(attrs []Attribute, elements []Element) Element {
+	return basicTag(script, attrs, elements)
+}
+
+func Text(i interface{}) Element {
 	return Element{
-		Tag:        "p",
-		Elements:   elements,
-		Attributes: attrs,
+		Tag:  "text",
+		Text: fmt.Sprintf("%s", i),
 	}
 }
 
-func Text(s string) Element {
-	return Element{
-		Tag:  "text",
-		Text: s,
-	}
+func Button(attrs []Attribute, elements []Element) Element {
+	return basicTag(button, attrs, elements)
 }
