@@ -18,6 +18,12 @@ const (
 	section = "section"
 	img     = "img"
 	button  = "button"
+	table   = "table"
+	tr      = "tr"
+	th      = "th"
+	td      = "td"
+	tbody   = "tbody"
+	thead   = "thead"
 )
 
 type Attribute struct {
@@ -116,10 +122,34 @@ func Script(attrs []Attribute, elements []Element) Element {
 func Text(i interface{}) Element {
 	return Element{
 		Tag:  "text",
-		Text: fmt.Sprintf("%s", i),
+		Text: fmt.Sprintf("%v", i),
 	}
 }
 
 func Button(attrs []Attribute, elements []Element) Element {
 	return basicTag(button, attrs, elements)
+}
+
+func Table(attrs []Attribute, elements []Element) Element {
+	return basicTag(table, attrs, elements)
+}
+
+func THead(attrs []Attribute, elements []Element) Element {
+	return basicTag(thead, attrs, elements)
+}
+
+func TBody(attrs []Attribute, elements []Element) Element {
+	return basicTag(tbody, attrs, elements)
+}
+
+func Tr(attrs []Attribute, elements []Element) Element {
+	return basicTag(tr, attrs, elements)
+}
+
+func Th(attrs []Attribute, elements []Element) Element {
+	return basicTag(th, attrs, elements)
+}
+
+func Td(attrs []Attribute, elements []Element) Element {
+	return basicTag(td, attrs, elements)
 }

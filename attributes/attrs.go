@@ -2,6 +2,7 @@ package attributes
 
 import (
 	"strconv"
+	"strings"
 
 	"github.com/jpincas/htmlfunc/html"
 )
@@ -50,6 +51,30 @@ func intAttribute(k string, v int) html.Attribute {
 
 func Class(s string) html.Attribute {
 	return regularAttribute(class, s)
+}
+
+// ClassesIf takes a list of classes to apply according to a corresponding list
+// of booleans.  If more classes than appliers are provided, then extra
+// classes are automatically applied, which is a convenient way to provide
+// unconditional classes to the function.
+func ClassesIf(classes []string, appliers []bool) html.Attribute {
+	var classesToApply []string
+
+	for i, class := range classes {
+		if i < len(appliers) {
+			if appliers[i] {
+				classesToApply = append(classesToApply, class)
+			}
+		} else {
+			classesToApply = append(classesToApply, class)
+		}
+	}
+
+	return Class(strings.Join(classesToApply, " "))
+}
+
+func Classes(classes []string) html.Attribute {
+	return Class(strings.Join(classes, " "))
 }
 
 func Id(s string) html.Attribute {
