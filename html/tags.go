@@ -24,6 +24,12 @@ const (
 	td      = "td"
 	tbody   = "tbody"
 	thead   = "thead"
+	h1      = "h1"
+	h2      = "h2"
+	h3      = "h3"
+	h4      = "h4"
+	h5      = "h5"
+	h6      = "h6"
 )
 
 type Attribute struct {
@@ -126,6 +132,10 @@ func Text(i interface{}) Element {
 	}
 }
 
+func Nothing(attrs []Attribute, elements []Element) Element {
+	return Element{}
+}
+
 func Button(attrs []Attribute, elements []Element) Element {
 	return basicTag(button, attrs, elements)
 }
@@ -152,4 +162,28 @@ func Th(attrs []Attribute, elements []Element) Element {
 
 func Td(attrs []Attribute, elements []Element) Element {
 	return basicTag(td, attrs, elements)
+}
+
+func H1(attrs []Attribute, elements []Element) Element {
+	return basicTag(h1, attrs, elements)
+}
+
+func H2(attrs []Attribute, elements []Element) Element {
+	return basicTag(h2, attrs, elements)
+}
+
+func H3(attrs []Attribute, elements []Element) Element {
+	return basicTag(h3, attrs, elements)
+}
+
+func H4(attrs []Attribute, elements []Element) Element {
+	return basicTag(h4, attrs, elements)
+}
+
+func H5(attrs []Attribute, elements []Element) Element {
+	return basicTag(h5, attrs, elements)
+}
+
+func H6(attrs []Attribute, elements []Element) Element {
+	return basicTag(h6, attrs, elements)
 }

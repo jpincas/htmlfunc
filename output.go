@@ -25,18 +25,25 @@ func renderElements(els []h.Element) string {
 	var renderedEls []string
 
 	for _, el := range els {
-		renderedEls = append(
-			renderedEls,
-			renderElement(el),
-		)
+		if renderedElement, doRender := renderElement(el); doRender {
+			renderedEls = append(
+				renderedEls,
+				renderedElement,
+			)
+		}
 	}
 
 	return strings.Join(renderedEls, "")
 }
 
-func renderElement(el h.Element) string {
+func renderElement(el h.Element) (string, bool) {
+	// An element without a tag can be strategically used to render 'nothing'
+	if el.Tag == "" {
+		return "", false
+	}
+
 	if el.Tag == "text" {
-		return el.Text
+		return el.Text, true
 	}
 
 	if el.IsSelfClosing {
@@ -44,7 +51,7 @@ func renderElement(el h.Element) string {
 			"<%s%s>",
 			el.Tag,
 			renderAttrs(el.Attributes),
-		)
+		), true
 	}
 
 	return fmt.Sprintf(
@@ -53,7 +60,7 @@ func renderElement(el h.Element) string {
 		renderAttrs(el.Attributes),
 		renderElements(el.Elements),
 		el.Tag,
-	)
+	), true
 }
 
 func renderAttrs(attrs []h.Attribute) string {
