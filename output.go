@@ -10,7 +10,8 @@ import (
 var Render = renderElement
 
 func Write(el h.Element) []byte {
-	return []byte(renderElement(el))
+	renderedElement, _ := renderElement(el)
+	return []byte(renderedElement)
 }
 
 func WriteDoc(el h.Element) []byte {
@@ -18,7 +19,8 @@ func WriteDoc(el h.Element) []byte {
 }
 
 func RenderDoc(el h.Element) string {
-	return fmt.Sprintf(`<!DOCTYPE html>%s`, renderElement(el))
+	renderedElement, _ := renderElement(el)
+	return fmt.Sprintf(`<!DOCTYPE html>%s`, renderedElement)
 }
 
 func renderElements(els []h.Element) string {
