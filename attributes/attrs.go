@@ -24,6 +24,7 @@ const (
 	width     = "width"
 	height    = "height"
 	onclick   = "onclick"
+	xmlns     = "xmlns"
 )
 
 func regularAttribute(k, v string) html.Attribute {
@@ -79,6 +80,10 @@ func Classes(classes []string) html.Attribute {
 
 func Id(s string) html.Attribute {
 	return regularAttribute(id, s)
+}
+
+func Xmlns(s string) html.Attribute {
+	return regularAttribute(xmlns, s)
 }
 
 func Lang(s string) html.Attribute {
