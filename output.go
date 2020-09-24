@@ -23,6 +23,11 @@ func RenderDoc(el h.Element) string {
 	return fmt.Sprintf(`<!DOCTYPE html>%s`, renderedElement)
 }
 
+func RenderDocWith(docOptions string, el h.Element) string {
+	renderedElement, _ := renderElement(el)
+	return fmt.Sprintf(`<!DOCTYPE html %s>%s`, docOptions, renderedElement)
+}
+
 func renderElements(els []h.Element) string {
 	var renderedEls []string
 
