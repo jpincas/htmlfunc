@@ -50,28 +50,30 @@ func ConstructComplexTable(complexTable ComplexTable) h.Element {
 
 // Join separates HTML elements with the specifid separator
 func Join(els []h.Element, sep h.Element) (res []h.Element) {
-	if len(els) == 0 {
-		return res
-	}
-
 	for _, el := range els {
 		res = append(res, el, sep)
 	}
 
-	return res[:len(res)-1]
+	// remove the final separator
+	if len(res) > 0 {
+		res = res[:len(res)-1]
+	}
+
+	return
 }
 
 // JoinIf separates HTML elements with the specifid separator, if they are non blank
 func JoinIf(els []h.Element, sep h.Element) (res []h.Element) {
-	if len(els) == 0 {
-		return res
-	}
-
 	for _, el := range els {
 		if !el.IsEmpty() {
 			res = append(res, el, sep)
 		}
 	}
 
-	return res[:len(res)-1]
+	// remove the final separator
+	if len(res) > 0 {
+		res = res[:len(res)-1]
+	}
+
+	return
 }
