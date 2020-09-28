@@ -17,6 +17,7 @@ const (
 	span    = "span"
 	section = "section"
 	img     = "img"
+	br      = "br"
 	button  = "button"
 	table   = "table"
 	tr      = "tr"
@@ -47,6 +48,10 @@ type Element struct {
 	Elements      []Element
 	Text          string
 	IsSelfClosing bool
+}
+
+func (el Element) IsEmpty() bool {
+	return el.Text == "" && len(el.Elements) == 0
 }
 
 func Els(els ...Element) []Element {
@@ -91,6 +96,10 @@ func Section(attrs []Attribute, elements []Element) Element {
 
 func Img(attrs []Attribute) Element {
 	return selfClosingTag(img, attrs)
+}
+
+func Br() Element {
+	return selfClosingTag(br, []Attribute{})
 }
 
 func Nav(attrs []Attribute, elements []Element) Element {

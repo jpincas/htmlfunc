@@ -25,6 +25,11 @@ const (
 	height    = "height"
 	onclick   = "onclick"
 	xmlns     = "xmlns"
+
+	cellPadding = "cellpadding"
+	cellSpacing = "cellspacing"
+	border      = "border"
+	align       = "align"
 )
 
 func regularAttribute(k, v string) html.Attribute {
@@ -140,4 +145,20 @@ func Height(i int) html.Attribute {
 
 func OnClick(s string) html.Attribute {
 	return regularAttribute(onclick, s)
+}
+
+func CellPadding(pixels int) html.Attribute {
+	return intAttribute(cellPadding, pixels)
+}
+
+func CellSpacing(pixels int) html.Attribute {
+	return intAttribute(cellSpacing, pixels)
+}
+
+func Border(pixels int) html.Attribute {
+	return intAttribute(border, pixels)
+}
+
+func Align(s string) html.Attribute {
+	return regularAttribute(align, s)
 }
