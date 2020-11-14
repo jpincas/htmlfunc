@@ -26,25 +26,26 @@ type ComplexTable struct {
 func ConstructComplexTable(complexTable ComplexTable) h.Element {
 	headerCells := h.Els()
 	for _, columnHeading := range complexTable.HeaderRow {
-		headerCells = append(headerCells, h.Th(complexTable.HeadCellAttrs, h.Els(h.Text(columnHeading))))
+		headerCells = append(headerCells, h.Th(complexTable.HeadCellAttrs, h.Text(columnHeading)))
 	}
-	header := h.THead(complexTable.HeadAttrs, h.Els(h.Tr(complexTable.HeadRowAttrs, headerCells)))
+	header := h.THead(complexTable.HeadAttrs, h.Tr(complexTable.HeadRowAttrs, headerCells...))
 
 	bodyRows := h.Els()
 	for _, row := range complexTable.Rows {
 		tableCells := h.Els()
 		for _, cellValue := range row {
-			tableCells = append(tableCells, h.Td(complexTable.BodyCellAttrs, h.Els(h.Text(cellValue))))
+			tableCells = append(tableCells, h.Td(complexTable.BodyCellAttrs, h.Text(cellValue)))
 		}
 
-		bodyRows = append(bodyRows, h.Tr(complexTable.BodyRowAttrs, tableCells))
+		bodyRows = append(bodyRows, h.Tr(complexTable.BodyRowAttrs, tableCells...))
 	}
 
-	body := h.TBody(complexTable.BodyAttrs, bodyRows)
+	body := h.TBody(complexTable.BodyAttrs, bodyRows...)
 
 	return h.Table(
 		complexTable.GlobalAttrs,
-		h.Els(header, body),
+		header,
+		body,
 	)
 }
 

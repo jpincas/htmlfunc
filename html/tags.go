@@ -58,6 +58,18 @@ func Els(els ...Element) []Element {
 	return els
 }
 
+//Els1 is a convenience function to combine a single element then a list (which you can't do with
+// the standard spread syntax)
+func Els1(el Element, els []Element) []Element {
+	return append(Els(el), els...)
+}
+
+//Els2 is a convenience function to combine two single elements, then a list (which you can't do with
+// the standard spread syntax)
+func Els2(el1, el2 Element, els []Element) []Element {
+	return append(Els(el1, el2), els...)
+}
+
 func basicTag(tag string, attrs []Attribute, elements []Element) Element {
 	return Element{
 		Tag:        tag,
@@ -74,23 +86,23 @@ func selfClosingTag(tag string, attrs []Attribute) Element {
 	}
 }
 
-func Div(attrs []Attribute, elements []Element) Element {
+func Div(attrs []Attribute, elements ...Element) Element {
 	return basicTag(div, attrs, elements)
 }
 
-func P(attrs []Attribute, elements []Element) Element {
+func P(attrs []Attribute, elements ...Element) Element {
 	return basicTag(p, attrs, elements)
 }
 
-func A(attrs []Attribute, elements []Element) Element {
+func A(attrs []Attribute, elements ...Element) Element {
 	return basicTag(a, attrs, elements)
 }
 
-func Span(attrs []Attribute, elements []Element) Element {
+func Span(attrs []Attribute, elements ...Element) Element {
 	return basicTag(span, attrs, elements)
 }
 
-func Section(attrs []Attribute, elements []Element) Element {
+func Section(attrs []Attribute, elements ...Element) Element {
 	return basicTag(section, attrs, elements)
 }
 
@@ -102,19 +114,19 @@ func Br() Element {
 	return selfClosingTag(br, []Attribute{})
 }
 
-func Nav(attrs []Attribute, elements []Element) Element {
+func Nav(attrs []Attribute, elements ...Element) Element {
 	return basicTag(nav, attrs, elements)
 }
 
-func Html(attrs []Attribute, elements []Element) Element {
+func Html(attrs []Attribute, elements ...Element) Element {
 	return basicTag(html, attrs, elements)
 }
 
-func Head(attrs []Attribute, elements []Element) Element {
+func Head(attrs []Attribute, elements ...Element) Element {
 	return basicTag(head, attrs, elements)
 }
 
-func Title(attrs []Attribute, elements []Element) Element {
+func Title(attrs []Attribute, elements ...Element) Element {
 	return basicTag(title, attrs, elements)
 }
 
@@ -122,7 +134,7 @@ func Meta(attrs []Attribute) Element {
 	return selfClosingTag(meta, attrs)
 }
 
-func Body(attrs []Attribute, elements []Element) Element {
+func Body(attrs []Attribute, elements ...Element) Element {
 	return basicTag(body, attrs, elements)
 }
 
@@ -130,7 +142,7 @@ func Link(attrs []Attribute) Element {
 	return selfClosingTag(link, attrs)
 }
 
-func Script(attrs []Attribute, elements []Element) Element {
+func Script(attrs []Attribute, elements ...Element) Element {
 	return basicTag(script, attrs, elements)
 }
 
@@ -141,58 +153,58 @@ func Text(i interface{}) Element {
 	}
 }
 
-func Nothing(attrs []Attribute, elements []Element) Element {
+func Nothing(attrs []Attribute, elements ...Element) Element {
 	return Element{}
 }
 
-func Button(attrs []Attribute, elements []Element) Element {
+func Button(attrs []Attribute, elements ...Element) Element {
 	return basicTag(button, attrs, elements)
 }
 
-func Table(attrs []Attribute, elements []Element) Element {
+func Table(attrs []Attribute, elements ...Element) Element {
 	return basicTag(table, attrs, elements)
 }
 
-func THead(attrs []Attribute, elements []Element) Element {
+func THead(attrs []Attribute, elements ...Element) Element {
 	return basicTag(thead, attrs, elements)
 }
 
-func TBody(attrs []Attribute, elements []Element) Element {
+func TBody(attrs []Attribute, elements ...Element) Element {
 	return basicTag(tbody, attrs, elements)
 }
 
-func Tr(attrs []Attribute, elements []Element) Element {
+func Tr(attrs []Attribute, elements ...Element) Element {
 	return basicTag(tr, attrs, elements)
 }
 
-func Th(attrs []Attribute, elements []Element) Element {
+func Th(attrs []Attribute, elements ...Element) Element {
 	return basicTag(th, attrs, elements)
 }
 
-func Td(attrs []Attribute, elements []Element) Element {
+func Td(attrs []Attribute, elements ...Element) Element {
 	return basicTag(td, attrs, elements)
 }
 
-func H1(attrs []Attribute, elements []Element) Element {
+func H1(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h1, attrs, elements)
 }
 
-func H2(attrs []Attribute, elements []Element) Element {
+func H2(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h2, attrs, elements)
 }
 
-func H3(attrs []Attribute, elements []Element) Element {
+func H3(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h3, attrs, elements)
 }
 
-func H4(attrs []Attribute, elements []Element) Element {
+func H4(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h4, attrs, elements)
 }
 
-func H5(attrs []Attribute, elements []Element) Element {
+func H5(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h5, attrs, elements)
 }
 
-func H6(attrs []Attribute, elements []Element) Element {
+func H6(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h6, attrs, elements)
 }
