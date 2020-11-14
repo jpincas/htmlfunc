@@ -5,6 +5,7 @@ import (
 
 	"github.com/jpincas/htmlfunc"
 	a "github.com/jpincas/htmlfunc/attributes"
+	"github.com/jpincas/htmlfunc/css"
 	h "github.com/jpincas/htmlfunc/html"
 )
 
@@ -35,7 +36,12 @@ func main() {
 
 	body :=
 		h.Body(
-			h.Attrs(a.Class("body-class")),
+			h.Attrs(
+				a.Class("body-class"),
+				a.Style(
+					css.Width(50, css.Px),
+				),
+			),
 			content,
 		)
 

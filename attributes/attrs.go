@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/jpincas/htmlfunc/css"
 	"github.com/jpincas/htmlfunc/html"
 )
 
@@ -25,6 +26,7 @@ const (
 	height    = "height"
 	onclick   = "onclick"
 	xmlns     = "xmlns"
+	style     = "style"
 
 	cellPadding = "cellpadding"
 	cellSpacing = "cellspacing"
@@ -53,6 +55,14 @@ func intAttribute(k string, v int) html.Attribute {
 		Val:    strconv.Itoa(v),
 		IsBool: false,
 	}
+}
+
+func Style(styles ...css.KeyValuePair) html.Attribute {
+	if len(styles) == 0 {
+		return html.Attribute{}
+	}
+
+	return regularAttribute(style, css.PrintStyles(styles))
 }
 
 func Class(s string) html.Attribute {

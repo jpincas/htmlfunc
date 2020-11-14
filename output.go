@@ -78,16 +78,22 @@ func renderAttrs(attrs []h.Attribute) string {
 	var renderedAttrs []string
 
 	for _, attr := range attrs {
-		renderedAttrs = append(
-			renderedAttrs,
-			renderAttr(attr),
-		)
+		r := renderAttr(attr)
+		// Don't include blank attrs, to avoid extraneous spaces
+		if r != "" {
+			renderedAttrs = append(renderedAttrs, r)
+		}
 	}
 
 	return " " + strings.Join(renderedAttrs, " ")
 }
 
 func renderAttr(attr h.Attribute) string {
+	// An attr without a name is not rendered
+	if attr.Name == "" {
+		return ""
+	}
+
 	if attr.IsBool {
 		return attr.Name
 	}
