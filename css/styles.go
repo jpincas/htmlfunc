@@ -15,8 +15,9 @@ const (
 )
 
 type KeyValuePair struct {
-	key   string
-	value string
+	key      string
+	value    string
+        Include  bool
 }
 
 func (kvp KeyValuePair) String() string {
@@ -33,6 +34,15 @@ func PrintStyles(styles []KeyValuePair) string {
 	return strings.Join(components, ";")
 }
 
-func Width(w int, unit string) KeyValuePair {
-	return KeyValuePair{width, fmt.Sprintf("%v%s", w, unit)}
+func constructKeyValuePair (key string , value interface{}, unit string, include ...bool) KeyValuePair {
+    i := true
+    if len(include) > 0 {
+        i = include[0]
+    }
+
+    return KeyValuePair{key, fmt.Sprintf("%v%s", value, unit), i}
+}
+
+func Width(w int, unit string, include ...bool) KeyValuePair {
+        return constructKeyValuePair(width, w, unit, include...)
 }

@@ -58,11 +58,20 @@ func intAttribute(k string, v int) html.Attribute {
 }
 
 func Style(styles ...css.KeyValuePair) html.Attribute {
-	if len(styles) == 0 {
+
+        includedStyles := []css.KeyValuePair{}
+        for _, style := range styles{
+            if style.Include {
+                includedStyles = append(includedStyles, style)
+            }
+        }
+
+
+	if len(includedStyles) == 0 {
 		return html.Attribute{}
 	}
 
-	return regularAttribute(style, css.PrintStyles(styles))
+	return regularAttribute(style, css.PrintStyles(includedStyles))
 }
 
 func Class(s string) html.Attribute {

@@ -41,6 +41,10 @@ func main() {
 				a.Style(
 					css.Width(50, css.Px),
 				),
+                                a.Style(
+                                        css.Width(90, css.Px, false),
+                                        css.Width(150, css.Px, true),
+                                ),
 			),
 			content,
 		)
@@ -52,5 +56,7 @@ func main() {
 			body,
 		)
 
-	fmt.Println(htmlfunc.RenderDoc(doc))
+        output := htmlfunc.RenderDoc(doc)
+
+	fmt.Println(output)
 }
