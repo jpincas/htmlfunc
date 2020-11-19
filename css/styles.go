@@ -12,21 +12,46 @@ const (
 
 	fontFamily = "font-family"
 	fontSize   = "font-size"
+	fontWeight = "font-weight"
 
 	width    = "width"
 	maxWidth = "max-width"
 
-	marginRight = "margin-right"
-	marginLeft  = "margin-left"
+	margin         = "margin"
+	marginRight    = "margin-right"
+	marginLeft     = "margin-left"
+	padding        = "padding"
+	justifyContent = "justify-content"
+	alignItems     = "align-items"
+	textAlign      = "text-align"
+	flexWrap       = "flex-wrap"
+	lineHeight     = "line-height"
+
+	borderColor    = "border-color"
+	borderTop      = "border-top"
+	borderBottom   = "border-bottom"
+	borderCollapse = "border-collapse"
+	overFlowX      = "overflow-x"
+	opacity        = "opacity"
+	listStyle      = "list-style"
 )
 
 const (
 	// CSS Units
 	Px      = "px"
 	Percent = "%"
+	Em      = "em"
 
-	Block = "block"
-	Auto  = "auto"
+	Bold = "bold"
+
+	Block        = "block"
+	Auto         = "auto"
+	Flex         = "flex"
+	Center       = "center"
+	SpaceBetween = "space-between"
+	Wrap         = "wrap"
+
+	Collapse = "collapse"
 )
 
 var (
@@ -75,6 +100,10 @@ func MaxWidth(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(maxWidth, s, include...)
 }
 
+func Margin(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(margin, s, include...)
+}
+
 func MarginRight(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(marginRight, s, include...)
 }
@@ -113,4 +142,64 @@ func FontFamily(s string, include ...bool) KeyValuePair {
 
 func FontSize(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(fontSize, s, include...)
+}
+
+func FontWeight(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(fontWeight, s, include...)
+}
+
+func JustifyContent(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(justifyContent, s, include...)
+}
+
+func MultipleArgs(ss []string) string {
+	return strings.Join(ss, " ")
+}
+
+func Padding(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(padding, s, include...)
+}
+
+func FlexWrap(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(flexWrap, s, include...)
+}
+
+func LineHeight(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(lineHeight, s, include...)
+}
+
+func AlignItems(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(alignItems, s, include...)
+}
+
+func BorderCollapse(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(borderCollapse, s, include...)
+}
+
+func BorderColor(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(borderColor, s, include...)
+}
+
+func OverflowX(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(overFlowX, s, include...)
+}
+
+func Opacity(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(opacity, s, include...)
+}
+
+func BorderTop(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(borderTop, s, include...)
+}
+
+func BorderBottom(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(borderBottom, s, include...)
+}
+
+func ListStyle(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(listStyle, s, include...)
+}
+
+func TextAlign(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(textAlign, s, include...)
 }

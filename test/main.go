@@ -39,12 +39,12 @@ func main() {
 			h.Attrs(
 				a.Class("body-class"),
 				a.Style(
-					css.Width(50, css.Px),
+					css.Width(css.WithUnits(50, css.Px)),
 				),
-                                a.Style(
-                                        css.Width(90, css.Px, false),
-                                        css.Width(150, css.Px, true),
-                                ),
+				a.Style(
+					css.Color("white", false),
+					css.FontSize(css.WithUnits(150, css.Px), true),
+				),
 			),
 			content,
 		)
@@ -56,7 +56,7 @@ func main() {
 			body,
 		)
 
-        output := htmlfunc.RenderDoc(doc)
+	output := htmlfunc.RenderDoc(doc)
 
 	fmt.Println(output)
 }
