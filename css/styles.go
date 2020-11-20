@@ -38,6 +38,7 @@ const (
 
 const (
         Zero    = "0"
+        None    = "none"
 
 	// CSS Units
 	Px      = "px"

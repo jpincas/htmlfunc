@@ -31,6 +31,9 @@ const (
 	h4      = "h4"
 	h5      = "h5"
 	h6      = "h6"
+        ul      = "ul"
+        ol      = "ol"
+        li      = "li"
 )
 
 type Attribute struct {
@@ -207,4 +210,13 @@ func H5(attrs []Attribute, elements ...Element) Element {
 
 func H6(attrs []Attribute, elements ...Element) Element {
 	return basicTag(h6, attrs, elements)
+}
+func Ul(attrs []Attribute, elements ...Element) Element {
+	return basicTag(ul, attrs, elements)
+}
+func Ol(attrs []Attribute, elements ...Element) Element {
+	return basicTag(ol, attrs, elements)
+}
+func Li(attrs []Attribute, elements ...Element) Element {
+	return basicTag(li, attrs, elements)
 }
