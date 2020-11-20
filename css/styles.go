@@ -48,6 +48,7 @@ const (
 	Bold = "bold"
 
 	Block        = "block"
+        Inline       = "inline"
 	Auto         = "auto"
 	Flex         = "flex"
 	Center       = "center"
