@@ -104,6 +104,11 @@ func Margin(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(margin, s, include...)
 }
 
+func MarginVertHoriz(vertical, horiztonal string, include ...bool) KeyValuePair {
+        s := []string{vertical, horiztonal}
+        return constructKeyValuePair(margin, strings.Join(s, " "), include...)
+}
+
 func MarginRight(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(marginRight, s, include...)
 }
@@ -158,6 +163,11 @@ func MultipleArgs(ss []string) string {
 
 func Padding(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(padding, s, include...)
+}
+
+func PaddingVertHoriz(vertical, horiztonal string, include ...bool) KeyValuePair {
+        s := []string{vertical, horiztonal}
+        return constructKeyValuePair(padding, strings.Join(s, " "), include...)
 }
 
 func FlexWrap(s string, include ...bool) KeyValuePair {
