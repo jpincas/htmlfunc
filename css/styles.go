@@ -37,6 +37,8 @@ const (
 )
 
 const (
+        Zero    = "0"
+
 	// CSS Units
 	Px      = "px"
 	Percent = "%"
