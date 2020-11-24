@@ -27,6 +27,8 @@ const (
 	margin         = "margin"
 	marginRight    = "margin-right"
 	marginLeft     = "margin-left"
+	marginTop      = "margin-top"
+	marginBottom   = "margin-bottom"
 	padding        = "padding"
 	justifyContent = "justify-content"
 	alignItems     = "align-items"
@@ -137,6 +139,14 @@ func MarginRight(s string, include ...bool) KeyValuePair {
 
 func MarginLeft(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(marginLeft, s, include...)
+}
+
+func MarginTop(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(marginTop, s, include...)
+}
+
+func MarginBottom(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(marginBottom, s, include...)
 }
 
 func BackgroundColor(s string, include ...bool) KeyValuePair {

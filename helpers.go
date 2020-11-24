@@ -18,6 +18,7 @@ type ComplexTable struct {
 	Rows                                   [][]h.Element
 	GlobalAttrs                            []h.Attribute
 	HeadAttrs, HeadRowAttrs, HeadCellAttrs []h.Attribute
+	LastRowAttrs, LastRowCellAttrs         []h.Attribute
 	BodyAttrs, BodyRowAttrs, BodyCellAttrs []h.Attribute
 }
 
@@ -31,13 +32,23 @@ func ConstructComplexTable(complexTable ComplexTable) h.Element {
 	header := h.THead(complexTable.HeadAttrs, h.Tr(complexTable.HeadRowAttrs, headerCells...))
 
 	bodyRows := h.Els()
-	for _, row := range complexTable.Rows {
+	for i, row := range complexTable.Rows {
 		tableCells := h.Els()
-		for _, cellValue := range row {
-			tableCells = append(tableCells, h.Td(complexTable.BodyCellAttrs, cellValue))
+		var cellAttrs, rowAttrs []h.Attribute
+
+		if i < (len(complexTable.Rows) - 1) {
+			cellAttrs = complexTable.BodyCellAttrs
+			rowAttrs = complexTable.BodyRowAttrs
+		} else {
+			cellAttrs = complexTable.LastRowCellAttrs
+			rowAttrs = complexTable.LastRowAttrs
 		}
 
-		bodyRows = append(bodyRows, h.Tr(complexTable.BodyRowAttrs, tableCells...))
+		for _, cellValue := range row {
+			tableCells = append(tableCells, h.Td(cellAttrs, cellValue))
+		}
+
+		bodyRows = append(bodyRows, h.Tr(rowAttrs, tableCells...))
 	}
 
 	body := h.TBody(complexTable.BodyAttrs, bodyRows...)
