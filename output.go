@@ -44,6 +44,11 @@ func renderElements(els []h.Element) string {
 }
 
 func renderElement(el h.Element) (string, bool) {
+	// Raw trumps everything and is just returned as is
+	if el.Raw != "" {
+		return el.Raw, true
+	}
+
 	// An element without a tag can be strategically used to render 'nothing'
 	if el.Tag == "" {
 		return "", false

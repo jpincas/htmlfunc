@@ -46,6 +46,9 @@ func Attrs(attrs ...Attribute) []Attribute {
 }
 
 type Element struct {
+	// Raw is basically a bypass, allowing for element creation from raw HTML
+	Raw string
+
 	Tag           string
 	Attributes    []Attribute
 	Elements      []Element
@@ -86,6 +89,12 @@ func selfClosingTag(tag string, attrs []Attribute) Element {
 		Tag:           tag,
 		Attributes:    attrs,
 		IsSelfClosing: true,
+	}
+}
+
+func RawElement(b []byte) Element {
+	return Element{
+		Raw: string(b),
 	}
 }
 
