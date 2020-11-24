@@ -31,9 +31,9 @@ const (
 	h4      = "h4"
 	h5      = "h5"
 	h6      = "h6"
-        ul      = "ul"
-        ol      = "ol"
-        li      = "li"
+	ul      = "ul"
+	ol      = "ol"
+	li      = "li"
 )
 
 type Attribute struct {
@@ -156,7 +156,10 @@ func Text(i interface{}) Element {
 	}
 }
 
-func Nothing(attrs []Attribute, elements ...Element) Element {
+// Nothing generates a blank element.  The only reason we have the arguments
+// is to make the funciton type signature the same as the other construction
+// functions
+func Nothing(_ []Attribute, _ ...Element) Element {
 	return Element{}
 }
 

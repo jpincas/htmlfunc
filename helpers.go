@@ -5,7 +5,7 @@ import (
 )
 
 // ConstructTable is for quickly constructing simple tables with global attributes
-func ConstructTable(attrs []h.Attribute, headerRow []string, rows [][]interface{}) h.Element {
+func ConstructTable(attrs []h.Attribute, headerRow []string, rows [][]h.Element) h.Element {
 	return ConstructComplexTable(ComplexTable{
 		GlobalAttrs: attrs,
 		HeaderRow:   headerRow,
@@ -15,7 +15,7 @@ func ConstructTable(attrs []h.Attribute, headerRow []string, rows [][]interface{
 
 type ComplexTable struct {
 	HeaderRow                              []string
-	Rows                                   [][]interface{}
+	Rows                                   [][]h.Element
 	GlobalAttrs                            []h.Attribute
 	HeadAttrs, HeadRowAttrs, HeadCellAttrs []h.Attribute
 	BodyAttrs, BodyRowAttrs, BodyCellAttrs []h.Attribute
@@ -34,7 +34,7 @@ func ConstructComplexTable(complexTable ComplexTable) h.Element {
 	for _, row := range complexTable.Rows {
 		tableCells := h.Els()
 		for _, cellValue := range row {
-			tableCells = append(tableCells, h.Td(complexTable.BodyCellAttrs, h.Text(cellValue)))
+			tableCells = append(tableCells, h.Td(complexTable.BodyCellAttrs, cellValue))
 		}
 
 		bodyRows = append(bodyRows, h.Tr(complexTable.BodyRowAttrs, tableCells...))
