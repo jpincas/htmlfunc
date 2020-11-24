@@ -1,6 +1,7 @@
 package attributes
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -33,6 +34,32 @@ const (
 	cellSpacing = "cellspacing"
 	border      = "border"
 	align       = "align"
+
+	viewBox        = "viewBox" //yes, camel case is correct
+	stroke         = "stroke"
+	strokeWidth    = "stroke-width"
+	strokeLineCap  = "stroke-linecap"
+	strokeLineJoin = "stroke-linejoin"
+	fill           = "fill"
+	d              = "d"
+	points         = "points"
+
+	x  = "x"
+	rx = "rx"
+	y  = "y"
+	ry = "ry"
+	x1 = "x1"
+	y1 = "y1"
+	x2 = "x2"
+	y2 = "y2"
+
+	cx = "cx"
+	cy = "cy"
+	r  = "r"
+)
+
+const (
+	Round = "round"
 )
 
 func regularAttribute(k, v string) html.Attribute {
@@ -54,6 +81,14 @@ func intAttribute(k string, v int) html.Attribute {
 	return html.Attribute{
 		Name:   k,
 		Val:    strconv.Itoa(v),
+		IsBool: false,
+	}
+}
+
+func floatAttribute(k string, v float64) html.Attribute {
+	return html.Attribute{
+		Name:   k,
+		Val:    fmt.Sprintf("%v", v),
 		IsBool: false,
 	}
 }
@@ -184,4 +219,80 @@ func Border(pixels int) html.Attribute {
 
 func Align(s string) html.Attribute {
 	return regularAttribute(align, s)
+}
+
+func ViewBox(s string) html.Attribute {
+	return regularAttribute(viewBox, s)
+}
+
+func Stroke(s string) html.Attribute {
+	return regularAttribute(stroke, s)
+}
+
+func Fill(s string) html.Attribute {
+	return regularAttribute(fill, s)
+}
+
+func StrokeLineCap(s string) html.Attribute {
+	return regularAttribute(strokeLineCap, s)
+}
+
+func StrokeLineJoin(s string) html.Attribute {
+	return regularAttribute(strokeLineJoin, s)
+}
+
+func StrokeWidth(i int) html.Attribute {
+	return intAttribute(strokeWidth, i)
+}
+
+func D(s string) html.Attribute {
+	return regularAttribute(d, s)
+}
+
+func Points(s string) html.Attribute {
+	return regularAttribute(points, s)
+}
+
+func X(i int) html.Attribute {
+	return intAttribute(x, i)
+}
+
+func RX(i int) html.Attribute {
+	return intAttribute(rx, i)
+}
+
+func X1(f float64) html.Attribute {
+	return floatAttribute(x1, f)
+}
+
+func X2(f float64) html.Attribute {
+	return floatAttribute(x2, f)
+}
+
+func Y(i int) html.Attribute {
+	return intAttribute(y, i)
+}
+
+func RY(i int) html.Attribute {
+	return intAttribute(ry, i)
+}
+
+func Y1(f float64) html.Attribute {
+	return floatAttribute(y1, f)
+}
+
+func Y2(f float64) html.Attribute {
+	return floatAttribute(y2, f)
+}
+
+func CX(i int) html.Attribute {
+	return intAttribute(cx, i)
+}
+
+func CY(i int) html.Attribute {
+	return intAttribute(cy, i)
+}
+
+func R(i int) html.Attribute {
+	return intAttribute(r, i)
 }

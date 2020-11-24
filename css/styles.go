@@ -21,6 +21,7 @@ const (
 	fontWeight = "font-weight"
 
 	width    = "width"
+	height   = "height"
 	maxWidth = "max-width"
 
 	margin         = "margin"
@@ -96,6 +97,10 @@ func WithUnits(value interface{}, unit string) string {
 	return fmt.Sprintf("%v%s", value, unit)
 }
 
+func NoUnits(value interface{}) string {
+	return fmt.Sprintf("%v", value)
+}
+
 func constructKeyValuePair(key, value string, include ...bool) KeyValuePair {
 	i := true
 	if len(include) > 0 {
@@ -107,6 +112,10 @@ func constructKeyValuePair(key, value string, include ...bool) KeyValuePair {
 
 func Width(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(width, s, include...)
+}
+
+func Height(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(height, s, include...)
 }
 
 func MaxWidth(s string, include ...bool) KeyValuePair {

@@ -17,6 +17,12 @@ const (
 	span    = "span"
 	section = "section"
 	img     = "img"
+	svg     = "svg"
+	path    = "path"
+	polygon = "polygon"
+	rect    = "rect"
+	line    = "line"
+	circle  = "circle"
 	br      = "br"
 	button  = "button"
 	table   = "table"
@@ -39,6 +45,14 @@ const (
 type Attribute struct {
 	Name, Val string
 	IsBool    bool
+}
+
+func (a Attribute) RenderIf(doRender bool) Attribute {
+	if doRender {
+		return a
+	}
+
+	return Attribute{}
 }
 
 func Attrs(attrs ...Attribute) []Attribute {
@@ -120,6 +134,30 @@ func Section(attrs []Attribute, elements ...Element) Element {
 
 func Img(attrs []Attribute) Element {
 	return selfClosingTag(img, attrs)
+}
+
+func SVG(attrs []Attribute, elements ...Element) Element {
+	return basicTag(svg, attrs, elements)
+}
+
+func Path(attrs []Attribute) Element {
+	return basicTag(path, attrs, []Element{})
+}
+
+func Polygon(attrs []Attribute) Element {
+	return basicTag(polygon, attrs, []Element{})
+}
+
+func Rect(attrs []Attribute) Element {
+	return basicTag(rect, attrs, []Element{})
+}
+
+func Line(attrs []Attribute) Element {
+	return basicTag(line, attrs, []Element{})
+}
+
+func Circle(attrs []Attribute) Element {
+	return basicTag(circle, attrs, []Element{})
 }
 
 func Br() Element {
