@@ -142,6 +142,10 @@ func RGB(r, g, b float64) string {
 	return fmt.Sprintf("rgb(%v,%v,%v)", r, g, b)
 }
 
+func URL(s string) string {
+	return fmt.Sprintf(`url("%s")`, s)
+}
+
 func Display(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(display, s, include...)
 }
