@@ -143,7 +143,7 @@ func RGB(r, g, b float64) string {
 }
 
 func URL(s string) string {
-	return fmt.Sprintf(`url("%s")`, s)
+	return fmt.Sprintf(`url('%s')`, s)
 }
 
 func Display(s string, include ...bool) KeyValuePair {
