@@ -7,6 +7,7 @@ import (
 
 const (
 	backgroundColor = "background-color"
+	backgroundImage = "background-image"
 	color           = "color"
 	display         = "display"
 
@@ -37,8 +38,8 @@ const (
 )
 
 const (
-        Zero    = "0"
-        None    = "none"
+	Zero = "0"
+	None = "none"
 
 	// CSS Units
 	Px      = "px"
@@ -48,7 +49,7 @@ const (
 	Bold = "bold"
 
 	Block        = "block"
-        Inline       = "inline"
+	Inline       = "inline"
 	Auto         = "auto"
 	Flex         = "flex"
 	Center       = "center"
@@ -109,8 +110,8 @@ func Margin(s string, include ...bool) KeyValuePair {
 }
 
 func MarginVertHoriz(vertical, horiztonal string, include ...bool) KeyValuePair {
-        s := []string{vertical, horiztonal}
-        return constructKeyValuePair(margin, strings.Join(s, " "), include...)
+	s := []string{vertical, horiztonal}
+	return constructKeyValuePair(margin, strings.Join(s, " "), include...)
 }
 
 func MarginRight(s string, include ...bool) KeyValuePair {
@@ -123,6 +124,10 @@ func MarginLeft(s string, include ...bool) KeyValuePair {
 
 func BackgroundColor(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(backgroundColor, s, include...)
+}
+
+func BackgroundImage(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(backgroundImage, s, include...)
 }
 
 func Color(s string, include ...bool) KeyValuePair {
@@ -165,13 +170,17 @@ func MultipleArgs(ss []string) string {
 	return strings.Join(ss, " ")
 }
 
+func MultipleValues(ss []string) string {
+	return strings.Join(ss, ",")
+}
+
 func Padding(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(padding, s, include...)
 }
 
 func PaddingVertHoriz(vertical, horiztonal string, include ...bool) KeyValuePair {
-        s := []string{vertical, horiztonal}
-        return constructKeyValuePair(padding, strings.Join(s, " "), include...)
+	s := []string{vertical, horiztonal}
+	return constructKeyValuePair(padding, strings.Join(s, " "), include...)
 }
 
 func FlexWrap(s string, include ...bool) KeyValuePair {
