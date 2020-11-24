@@ -11,6 +11,7 @@ import (
 const (
 	id        = "id"
 	class     = "class"
+	title     = "title"
 	lang      = "lang"
 	charset   = "charset"
 	name      = "name"
@@ -59,13 +60,12 @@ func intAttribute(k string, v int) html.Attribute {
 
 func Style(styles ...css.KeyValuePair) html.Attribute {
 
-        includedStyles := []css.KeyValuePair{}
-        for _, style := range styles{
-            if style.Include {
-                includedStyles = append(includedStyles, style)
-            }
-        }
-
+	includedStyles := []css.KeyValuePair{}
+	for _, style := range styles {
+		if style.Include {
+			includedStyles = append(includedStyles, style)
+		}
+	}
 
 	if len(includedStyles) == 0 {
 		return html.Attribute{}
@@ -76,6 +76,10 @@ func Style(styles ...css.KeyValuePair) html.Attribute {
 
 func Class(s string) html.Attribute {
 	return regularAttribute(class, s)
+}
+
+func Title(s string) html.Attribute {
+	return regularAttribute(title, s)
 }
 
 // ClassesIf takes a list of classes to apply according to a corresponding list
