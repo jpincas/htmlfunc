@@ -8,8 +8,13 @@ import (
 const (
 	backgroundColor = "background-color"
 	backgroundImage = "background-image"
-	color           = "color"
-	display         = "display"
+
+	backgroundRepeat   = "background-repeat"
+	backgroundPosition = "background-position"
+	backgroundSize     = "background-size"
+
+	color   = "color"
+	display = "display"
 
 	fontFamily = "font-family"
 	fontSize   = "font-size"
@@ -57,6 +62,9 @@ const (
 	Wrap         = "wrap"
 
 	Collapse = "collapse"
+
+	NoRepeat = "no-repeat"
+	Cover    = "cover"
 )
 
 var (
@@ -205,6 +213,18 @@ func BorderCollapse(s string, include ...bool) KeyValuePair {
 
 func BorderColor(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(borderColor, s, include...)
+}
+
+func BackgroundRepeat(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(backgroundRepeat, s, include...)
+}
+
+func BackgroundPosition(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(backgroundPosition, s, include...)
+}
+
+func BackgroundSize(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(backgroundSize, s, include...)
 }
 
 func OverflowX(s string, include ...bool) KeyValuePair {
