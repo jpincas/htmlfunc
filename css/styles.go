@@ -33,6 +33,7 @@ const (
 	justifyContent = "justify-content"
 	alignItems     = "align-items"
 	textAlign      = "text-align"
+	textDecoration = "text-decoration"
 	flexWrap       = "flex-wrap"
 	lineHeight     = "line-height"
 
@@ -40,6 +41,9 @@ const (
 	borderTop      = "border-top"
 	borderBottom   = "border-bottom"
 	borderCollapse = "border-collapse"
+	borderRadius   = "border-radius"
+	borderStyle    = "border-style"
+	border         = "border"
 	overFlowX      = "overflow-x"
 	opacity        = "opacity"
 	listStyle      = "list-style"
@@ -66,8 +70,10 @@ const (
 
 	Collapse = "collapse"
 
-	NoRepeat = "no-repeat"
-	Cover    = "cover"
+	NoRepeat    = "no-repeat"
+	Cover       = "cover"
+	Solid       = "solid"
+	Transparent = "transparent"
 )
 
 var (
@@ -197,11 +203,11 @@ func JustifyContent(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(justifyContent, s, include...)
 }
 
-func MultipleArgs(ss []string) string {
+func MultipleArgs(ss ...string) string {
 	return strings.Join(ss, " ")
 }
 
-func MultipleValues(ss []string) string {
+func MultipleValues(ss ...string) string {
 	return strings.Join(ss, ",")
 }
 
@@ -234,6 +240,10 @@ func BorderColor(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(borderColor, s, include...)
 }
 
+func BorderRadius(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(borderRadius, s, include...)
+}
+
 func BackgroundRepeat(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(backgroundRepeat, s, include...)
 }
@@ -254,6 +264,10 @@ func Opacity(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(opacity, s, include...)
 }
 
+func Border(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(border, s, include...)
+}
+
 func BorderTop(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(borderTop, s, include...)
 }
@@ -262,10 +276,18 @@ func BorderBottom(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(borderBottom, s, include...)
 }
 
+func BorderStyle(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(borderStyle, s, include...)
+}
+
 func ListStyle(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(listStyle, s, include...)
 }
 
 func TextAlign(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(textAlign, s, include...)
+}
+
+func TextDecoration(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(textDecoration, s, include...)
 }
