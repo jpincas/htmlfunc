@@ -18,6 +18,10 @@ func WriteDoc(el h.Element) []byte {
 	return []byte(RenderDoc(el))
 }
 
+func WriteDocWith(docOptions string, el h.Element) []byte {
+	return []byte(RenderDocWith(docOptions, el))
+}
+
 func RenderDoc(el h.Element) string {
 	renderedElement, _ := renderElement(el)
 	return fmt.Sprintf(`<!DOCTYPE html>%s`, renderedElement)
