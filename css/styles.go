@@ -47,6 +47,8 @@ const (
 	overFlowX      = "overflow-x"
 	opacity        = "opacity"
 	listStyle      = "list-style"
+
+	pageBreakBefore = "page-break-before"
 )
 
 const (
@@ -67,6 +69,7 @@ const (
 	Center       = "center"
 	SpaceBetween = "space-between"
 	Wrap         = "wrap"
+	Always       = "always"
 
 	Collapse = "collapse"
 
@@ -290,4 +293,8 @@ func TextAlign(s string, include ...bool) KeyValuePair {
 
 func TextDecoration(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(textDecoration, s, include...)
+}
+
+func PageBreakBefore(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(pageBreakBefore, s, include...)
 }
