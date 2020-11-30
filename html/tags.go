@@ -70,6 +70,14 @@ type Element struct {
 	IsSelfClosing bool
 }
 
+func (el Element) RenderIf(doRender bool) Element {
+	if doRender {
+		return el
+	}
+
+	return Element{}
+}
+
 func (el Element) IsEmpty() bool {
 	return el.Text == "" && len(el.Elements) == 0
 }
