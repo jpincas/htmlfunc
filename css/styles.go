@@ -316,3 +316,7 @@ func TextDecoration(s string, include ...bool) KeyValuePair {
 func PageBreakBefore(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(pageBreakBefore, s, include...)
 }
+
+func VerticalAlign(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(verticalAlign, s, include...)
+}
