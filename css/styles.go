@@ -24,12 +24,18 @@ const (
 	height   = "height"
 	maxWidth = "max-width"
 
-	margin         = "margin"
-	marginRight    = "margin-right"
-	marginLeft     = "margin-left"
-	marginTop      = "margin-top"
-	marginBottom   = "margin-bottom"
-	padding        = "padding"
+	margin       = "margin"
+	marginRight  = "margin-right"
+	marginLeft   = "margin-left"
+	marginTop    = "margin-top"
+	marginBottom = "margin-bottom"
+
+	padding       = "padding"
+	paddingRight  = "padding-right"
+	paddingLeft   = "padding-left"
+	paddingTop    = "padding-top"
+	paddingBottom = "padding-bottom"
+
 	justifyContent = "justify-content"
 	alignItems     = "align-items"
 	textAlign      = "text-align"
@@ -44,10 +50,11 @@ const (
 	borderRadius   = "border-radius"
 	borderStyle    = "border-style"
 	border         = "border"
-	overFlowX      = "overflow-x"
-	opacity        = "opacity"
-	listStyle      = "list-style"
-	verticalAlign  = "vertical-align"
+
+	overFlowX     = "overflow-x"
+	opacity       = "opacity"
+	listStyle     = "list-style"
+	verticalAlign = "vertical-align"
 
 	pageBreakBefore = "page-break-before"
 )
@@ -234,6 +241,22 @@ func MultipleValues(ss ...string) string {
 
 func Padding(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(padding, s, include...)
+}
+
+func PaddingTop(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(paddingTop, s, include...)
+}
+
+func PaddingBottom(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(paddingBottom, s, include...)
+}
+
+func PaddingLeft(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(paddingLeft, s, include...)
+}
+
+func PaddingRight(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(paddingRight, s, include...)
 }
 
 func PaddingVertHoriz(vertical, horiztonal string, include ...bool) KeyValuePair {
