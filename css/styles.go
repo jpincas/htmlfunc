@@ -47,6 +47,7 @@ const (
 	overFlowX      = "overflow-x"
 	opacity        = "opacity"
 	listStyle      = "list-style"
+	verticalAlign  = "vertical-align"
 
 	pageBreakBefore = "page-break-before"
 )
@@ -57,8 +58,12 @@ const (
 
 	// CSS Units
 	Px      = "px"
+	Pt      = "pt"
 	Percent = "%"
 	Em      = "em"
+	Cm      = "cm"
+	Mm      = "mm"
+	Rem     = "rem"
 
 	Bold = "bold"
 
@@ -67,6 +72,8 @@ const (
 	Auto         = "auto"
 	Flex         = "flex"
 	Center       = "center"
+	Right        = "right"
+	Left         = "left"
 	SpaceBetween = "space-between"
 	Wrap         = "wrap"
 	Always       = "always"
@@ -77,6 +84,17 @@ const (
 	Cover       = "cover"
 	Solid       = "solid"
 	Transparent = "transparent"
+
+	Baseline   = "baseline"
+	Sub        = "sub"
+	Super      = "super"
+	Top        = "top"
+	TextTop    = "text-top"
+	Middle     = "middle"
+	Bottom     = "bottom"
+	TextBottom = "text-bottom"
+	Initial    = "initial"
+	Inherit    = "inherit"
 )
 
 var (
