@@ -78,6 +78,14 @@ func (el Element) RenderIf(doRender bool) Element {
 	return Element{}
 }
 
+func (el Element) RenderIfWithDefault(doRender bool, d Element) Element {
+	if doRender {
+		return el
+	}
+
+	return d
+}
+
 func (el Element) IsEmpty() bool {
 	return el.Text == "" && len(el.Elements) == 0
 }
