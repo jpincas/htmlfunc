@@ -115,6 +115,12 @@ type KeyValuePair struct {
 	Include bool
 }
 
+type Styles []KeyValuePair
+
+func StyleList(kvs ...KeyValuePair) Styles {
+	return kvs
+}
+
 func (kvp KeyValuePair) String() string {
 	return fmt.Sprintf("%s:%s", kvp.key, kvp.value)
 }
