@@ -34,6 +34,19 @@ func main() {
 			h.Meta(h.Attrs(a.HttpEquiv("X-UA-Compatible"), a.Content("ie=edge"))),
 		)
 
+	table :=
+		h.Table(
+			h.Attrs(),
+			h.Tr(
+				h.Attrs(),
+				h.Td(
+					[]h.Attribute{
+						a.Style(),
+					},
+				),
+			),
+		)
+
 	body :=
 		h.Body(
 			h.Attrs(
@@ -47,6 +60,7 @@ func main() {
 				),
 			),
 			content,
+			table,
 		)
 
 	doc :=

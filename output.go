@@ -80,10 +80,6 @@ func renderElement(el h.Element) (string, bool) {
 }
 
 func renderAttrs(attrs []h.Attribute) string {
-	if len(attrs) == 0 {
-		return ""
-	}
-
 	var renderedAttrs []string
 
 	for _, attr := range attrs {
@@ -92,6 +88,10 @@ func renderAttrs(attrs []h.Attribute) string {
 		if r != "" {
 			renderedAttrs = append(renderedAttrs, r)
 		}
+	}
+
+	if len(renderedAttrs) == 0 {
+		return ""
 	}
 
 	return " " + strings.Join(renderedAttrs, " ")
