@@ -68,7 +68,7 @@ func (attrs Attributes) Merge() Attributes {
 	var styles []string
 	var otherAttrs Attributes
 
-	for _, attr := range atts {
+	for _, attr := range attrs {
 		switch attr.Name {
 		case class:
 			classes = append(classes, attr.Val)
