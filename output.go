@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/jpincas/htmlfunc/attributes"
 	h "github.com/jpincas/htmlfunc/html"
 )
 
 var Render = renderElement
 
 func Write(el h.Element) []byte {
-	renderedElement, _ := renderElement(el)
+	renderedElement, _ := renderElement(el, 0)
 	return []byte(renderedElement)
 }
 
@@ -23,25 +24,25 @@ func WriteDocWith(docOptions string, el h.Element) []byte {
 }
 
 func RenderNoDoc(el h.Element) string {
-	renderedElement, _ := renderElement(el)
+	renderedElement, _ := renderElement(el, 0)
 	return renderedElement
 }
 
 func RenderDoc(el h.Element) string {
-	renderedElement, _ := renderElement(el)
-	return fmt.Sprintf(`<!DOCTYPE html>%s`, renderedElement)
+	renderedElement, _ := renderElement(el, 0)
+	return fmt.Sprintf("<!DOCTYPE html>\n%s", renderedElement)
 }
 
 func RenderDocWith(docOptions string, el h.Element) string {
-	renderedElement, _ := renderElement(el)
-	return fmt.Sprintf(`<!DOCTYPE html %s>%s`, docOptions, renderedElement)
+	renderedElement, _ := renderElement(el, 0)
+	return fmt.Sprintf("<!DOCTYPE html %s>\n%s", docOptions, renderedElement)
 }
 
-func renderElements(els []h.Element) string {
+func renderElements(els []h.Element, tabs int) string {
 	var renderedEls []string
 
 	for _, el := range els {
-		if renderedElement, doRender := renderElement(el); doRender {
+		if renderedElement, doRender := renderElement(el, tabs); doRender {
 			renderedEls = append(
 				renderedEls,
 				renderedElement,
@@ -52,7 +53,15 @@ func renderElements(els []h.Element) string {
 	return strings.Join(renderedEls, "")
 }
 
-func renderElement(el h.Element) (string, bool) {
+func renderNTabs(n int) (res string) {
+	for i := 0; i < n; i++ {
+		res = res + "  "
+	}
+
+	return
+}
+
+func renderElement(el h.Element, tabs int) (string, bool) {
 	// Raw trumps everything and is just returned as is
 	if el.Raw != "" {
 		return el.Raw, true
@@ -63,28 +72,35 @@ func renderElement(el h.Element) (string, bool) {
 		return "", false
 	}
 
+	t := renderNTabs(tabs)
+
 	if el.Tag == "text" {
-		return el.Text, true
+		return fmt.Sprintf("%s%s\n", t, el.Text), true
 	}
 
 	if el.IsSelfClosing {
 		return fmt.Sprintf(
-			"<%s%s>",
+			"%s<%s%s>\n",
+			t,
 			el.Tag,
 			renderAttrs(el.Attributes),
 		), true
 	}
 
 	return fmt.Sprintf(
-		"<%s%s>%s</%s>",
+		"%s<%s%s>\n%s%s</%s>\n",
+		t,
 		el.Tag,
 		renderAttrs(el.Attributes),
-		renderElements(el.Elements),
+		renderElements(el.Elements, tabs+1),
+		t,
 		el.Tag,
 	), true
 }
 
-func renderAttrs(attrs []h.Attribute) string {
+func renderAttrs(attrs attributes.Attributes) string {
+	attrs = attrs.MergeDuplicates()
+
 	var renderedAttrs []string
 
 	for _, attr := range attrs {
@@ -102,7 +118,7 @@ func renderAttrs(attrs []h.Attribute) string {
 	return " " + strings.Join(renderedAttrs, " ")
 }
 
-func renderAttr(attr h.Attribute) string {
+func renderAttr(attr attributes.Attribute) string {
 	// An attr without a name is not rendered
 	if attr.Name == "" {
 		return ""

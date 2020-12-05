@@ -1,11 +1,12 @@
 package htmlfunc
 
 import (
+	"github.com/jpincas/htmlfunc/attributes"
 	h "github.com/jpincas/htmlfunc/html"
 )
 
 // ConstructTable is for quickly constructing simple tables with global attributes
-func ConstructTable(attrs []h.Attribute, headerRow []string, rows [][]h.Element) h.Element {
+func ConstructTable(attrs attributes.Attributes, headerRow []string, rows [][]h.Element) h.Element {
 	return ConstructComplexTable(ComplexTable{
 		GlobalAttrs: attrs,
 		HeaderRow:   headerRow,
@@ -16,10 +17,10 @@ func ConstructTable(attrs []h.Attribute, headerRow []string, rows [][]h.Element)
 type ComplexTable struct {
 	HeaderRow                              []string
 	Rows                                   [][]h.Element
-	GlobalAttrs                            []h.Attribute
-	HeadAttrs, HeadRowAttrs, HeadCellAttrs []h.Attribute
-	LastRowAttrs, LastRowCellAttrs         []h.Attribute
-	BodyAttrs, BodyRowAttrs, BodyCellAttrs []h.Attribute
+	GlobalAttrs                            attributes.Attributes
+	HeadAttrs, HeadRowAttrs, HeadCellAttrs attributes.Attributes
+	LastRowAttrs, LastRowCellAttrs         attributes.Attributes
+	BodyAttrs, BodyRowAttrs, BodyCellAttrs attributes.Attributes
 }
 
 // ConstructComplexTable is for constructing more complex tables with inline attributes
@@ -34,7 +35,7 @@ func ConstructComplexTable(complexTable ComplexTable) h.Element {
 	bodyRows := h.Els()
 	for i, row := range complexTable.Rows {
 		tableCells := h.Els()
-		var cellAttrs, rowAttrs []h.Attribute
+		var cellAttrs, rowAttrs attributes.Attributes
 
 		if i < (len(complexTable.Rows) - 1) {
 			cellAttrs = complexTable.BodyCellAttrs

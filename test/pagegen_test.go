@@ -21,12 +21,12 @@ import (
 func TestPageGen(t *testing.T) {
 	content :=
 		h.Div(
-			h.Attrs(
+			a.Attrs(
 				a.Id("test-id"),
 				a.Class("test-class"),
 			),
 			h.P(
-				h.Attrs(
+				a.Attrs(
 					a.Id("nested-id"),
 					a.Class("nested-class"),
 				),
@@ -36,22 +36,25 @@ func TestPageGen(t *testing.T) {
 
 	head :=
 		h.Head(
-			h.Attrs(),
+			a.Attrs(),
 
 			// Title is required - validator will fail without it
-			h.Title(h.Attrs(), html.Text("Test Document")),
-			h.Meta(h.Attrs(a.Charset("UTF-8"))),
-			h.Meta(h.Attrs(a.Name("viewport"), a.Content("width=device-width, initial-scale=1.0"))),
-			h.Meta(h.Attrs(a.HttpEquiv("X-UA-Compatible"), a.Content("ie=edge"))),
+			h.Title(a.Attrs(), html.Text("Test Document")),
+			h.Meta(a.Attrs(a.Charset("UTF-8"))),
+			h.Meta(a.Attrs(a.Name("viewport"), a.Content("width=device-width, initial-scale=1.0"))),
+			h.Meta(a.Attrs(a.HttpEquiv("X-UA-Compatible"), a.Content("ie=edge"))),
 		)
 
 	table :=
 		h.Table(
-			h.Attrs(),
+			a.Attrs(),
 			h.Tr(
-				h.Attrs(),
+				a.Attrs(
+					a.Class("class1"),
+					a.Class("class2"),
+				),
 				h.Td(
-					[]h.Attribute{
+					a.Attributes{
 						a.Style(),
 					},
 				),
@@ -60,7 +63,7 @@ func TestPageGen(t *testing.T) {
 
 	body :=
 		h.Body(
-			h.Attrs(
+			a.Attrs(
 				a.Class("body-class"),
 
 				// Repeated 'style' declaration will fail if not dealt with
@@ -78,7 +81,7 @@ func TestPageGen(t *testing.T) {
 
 	doc :=
 		h.Html(
-			h.Attrs(a.Lang("en")),
+			a.Attrs(a.Lang("en")),
 			head,
 			body,
 		)

@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/jpincas/htmlfunc/css"
-	"github.com/jpincas/htmlfunc/html"
 )
 
 const (
@@ -62,38 +61,86 @@ const (
 	Round = "round"
 )
 
-func regularAttribute(k, v string) html.Attribute {
-	return html.Attribute{
+type Attribute struct {
+	Name, Val string
+	IsBool    bool
+}
+
+type Attributes []Attribute
+
+func (a Attribute) RenderIf(doRender bool) Attribute {
+	if doRender {
+		return a
+	}
+
+	return Attribute{}
+}
+
+func Attrs(attrs ...Attribute) Attributes {
+	return attrs
+}
+
+// Merge helps deal with repition of certain attributes, merging them into one.
+// At the moment, we deal with 'class' and 'style'
+func (attrs Attributes) MergeDuplicates() Attributes {
+	var classes []string
+	var styles []string
+	var otherAttrs Attributes
+
+	for _, attr := range attrs {
+		switch attr.Name {
+		case class:
+			classes = append(classes, attr.Val)
+		case style:
+			styles = append(styles, attr.Val)
+		default:
+			otherAttrs = append(otherAttrs, attr)
+		}
+	}
+
+	if len(classes) > 0 {
+		otherAttrs = append(otherAttrs, Classes(classes))
+	}
+
+	if len(styles) > 0 {
+		otherAttrs = append(otherAttrs, regularAttribute(style, strings.Join(styles, ";")))
+	}
+
+	return otherAttrs
+}
+
+func regularAttribute(k, v string) Attribute {
+	return Attribute{
 		Name:   k,
 		Val:    v,
 		IsBool: false,
 	}
 }
 
-func booleanAttribute(k string) html.Attribute {
-	return html.Attribute{
+func booleanAttribute(k string) Attribute {
+	return Attribute{
 		Name:   k,
 		IsBool: true,
 	}
 }
 
-func intAttribute(k string, v int) html.Attribute {
-	return html.Attribute{
+func intAttribute(k string, v int) Attribute {
+	return Attribute{
 		Name:   k,
 		Val:    strconv.Itoa(v),
 		IsBool: false,
 	}
 }
 
-func floatAttribute(k string, v float64) html.Attribute {
-	return html.Attribute{
+func floatAttribute(k string, v float64) Attribute {
+	return Attribute{
 		Name:   k,
 		Val:    fmt.Sprintf("%v", v),
 		IsBool: false,
 	}
 }
 
-func Style(styles ...css.KeyValuePair) html.Attribute {
+func Style(styles ...css.KeyValuePair) Attribute {
 
 	includedStyles := []css.KeyValuePair{}
 	for _, style := range styles {
@@ -103,17 +150,17 @@ func Style(styles ...css.KeyValuePair) html.Attribute {
 	}
 
 	if len(includedStyles) == 0 {
-		return html.Attribute{}
+		return Attribute{}
 	}
 
 	return regularAttribute(style, css.PrintStyles(includedStyles))
 }
 
-func Class(s string) html.Attribute {
+func Class(s string) Attribute {
 	return regularAttribute(class, s)
 }
 
-func Title(s string) html.Attribute {
+func Title(s string) Attribute {
 	return regularAttribute(title, s)
 }
 
@@ -121,7 +168,7 @@ func Title(s string) html.Attribute {
 // of booleans.  If more classes than appliers are provided, then extra
 // classes are automatically applied, which is a convenient way to provide
 // unconditional classes to the function.
-func ClassesIf(classes []string, appliers []bool) html.Attribute {
+func ClassesIf(classes []string, appliers []bool) Attribute {
 	var classesToApply []string
 
 	for i, class := range classes {
@@ -137,162 +184,162 @@ func ClassesIf(classes []string, appliers []bool) html.Attribute {
 	return Class(strings.Join(classesToApply, " "))
 }
 
-func Classes(classes []string) html.Attribute {
+func Classes(classes []string) Attribute {
 	return Class(strings.Join(classes, " "))
 }
 
-func Id(s string) html.Attribute {
+func Id(s string) Attribute {
 	return regularAttribute(id, s)
 }
 
-func Xmlns(s string) html.Attribute {
+func Xmlns(s string) Attribute {
 	return regularAttribute(xmlns, s)
 }
 
-func Lang(s string) html.Attribute {
+func Lang(s string) Attribute {
 	return regularAttribute(lang, s)
 }
 
-func Charset(s string) html.Attribute {
+func Charset(s string) Attribute {
 	return regularAttribute(charset, s)
 }
 
-func Name(s string) html.Attribute {
+func Name(s string) Attribute {
 	return regularAttribute(name, s)
 }
 
-func Content(s string) html.Attribute {
+func Content(s string) Attribute {
 	return regularAttribute(content, s)
 }
 
-func HttpEquiv(s string) html.Attribute {
+func HttpEquiv(s string) Attribute {
 	return regularAttribute(httpEquiv, s)
 }
 
-func Rel(s string) html.Attribute {
+func Rel(s string) Attribute {
 	return regularAttribute(rel, s)
 }
 
-func Href(s string) html.Attribute {
+func Href(s string) Attribute {
 	return regularAttribute(href, s)
 }
 
-func Type(s string) html.Attribute {
+func Type(s string) Attribute {
 	return regularAttribute(type_, s)
 }
 
-func Src(s string) html.Attribute {
+func Src(s string) Attribute {
 	return regularAttribute(src, s)
 }
 
-func Defer() html.Attribute {
+func Defer() Attribute {
 	return booleanAttribute(defer_)
 }
 
-func Role(s string) html.Attribute {
+func Role(s string) Attribute {
 	return regularAttribute(role, s)
 }
 
-func Width(i int) html.Attribute {
+func Width(i int) Attribute {
 	return intAttribute(width, i)
 }
 
-func Height(i int) html.Attribute {
+func Height(i int) Attribute {
 	return intAttribute(height, i)
 }
 
-func OnClick(s string) html.Attribute {
+func OnClick(s string) Attribute {
 	return regularAttribute(onclick, s)
 }
 
-func CellPadding(pixels int) html.Attribute {
+func CellPadding(pixels int) Attribute {
 	return intAttribute(cellPadding, pixels)
 }
 
-func CellSpacing(pixels int) html.Attribute {
+func CellSpacing(pixels int) Attribute {
 	return intAttribute(cellSpacing, pixels)
 }
 
-func Border(pixels int) html.Attribute {
+func Border(pixels int) Attribute {
 	return intAttribute(border, pixels)
 }
 
-func Align(s string) html.Attribute {
+func Align(s string) Attribute {
 	return regularAttribute(align, s)
 }
 
-func ViewBox(s string) html.Attribute {
+func ViewBox(s string) Attribute {
 	return regularAttribute(viewBox, s)
 }
 
-func Stroke(s string) html.Attribute {
+func Stroke(s string) Attribute {
 	return regularAttribute(stroke, s)
 }
 
-func Fill(s string) html.Attribute {
+func Fill(s string) Attribute {
 	return regularAttribute(fill, s)
 }
 
-func StrokeLineCap(s string) html.Attribute {
+func StrokeLineCap(s string) Attribute {
 	return regularAttribute(strokeLineCap, s)
 }
 
-func StrokeLineJoin(s string) html.Attribute {
+func StrokeLineJoin(s string) Attribute {
 	return regularAttribute(strokeLineJoin, s)
 }
 
-func StrokeWidth(i int) html.Attribute {
+func StrokeWidth(i int) Attribute {
 	return intAttribute(strokeWidth, i)
 }
 
-func D(s string) html.Attribute {
+func D(s string) Attribute {
 	return regularAttribute(d, s)
 }
 
-func Points(s string) html.Attribute {
+func Points(s string) Attribute {
 	return regularAttribute(points, s)
 }
 
-func X(i int) html.Attribute {
+func X(i int) Attribute {
 	return intAttribute(x, i)
 }
 
-func RX(i int) html.Attribute {
+func RX(i int) Attribute {
 	return intAttribute(rx, i)
 }
 
-func X1(f float64) html.Attribute {
+func X1(f float64) Attribute {
 	return floatAttribute(x1, f)
 }
 
-func X2(f float64) html.Attribute {
+func X2(f float64) Attribute {
 	return floatAttribute(x2, f)
 }
 
-func Y(i int) html.Attribute {
+func Y(i int) Attribute {
 	return intAttribute(y, i)
 }
 
-func RY(i int) html.Attribute {
+func RY(i int) Attribute {
 	return intAttribute(ry, i)
 }
 
-func Y1(f float64) html.Attribute {
+func Y1(f float64) Attribute {
 	return floatAttribute(y1, f)
 }
 
-func Y2(f float64) html.Attribute {
+func Y2(f float64) Attribute {
 	return floatAttribute(y2, f)
 }
 
-func CX(i int) html.Attribute {
+func CX(i int) Attribute {
 	return intAttribute(cx, i)
 }
 
-func CY(i int) html.Attribute {
+func CY(i int) Attribute {
 	return intAttribute(cy, i)
 }
 
-func R(i int) html.Attribute {
+func R(i int) Attribute {
 	return intAttribute(r, i)
 }

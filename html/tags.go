@@ -1,6 +1,10 @@
 package html
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/jpincas/htmlfunc/attributes"
+)
 
 const (
 	html    = "html"
@@ -42,52 +46,12 @@ const (
 	li      = "li"
 )
 
-type Attribute struct {
-	Name, Val string
-	IsBool    bool
-}
-
-type Attributes []Attribute
-
-func (a Attribute) RenderIf(doRender bool) Attribute {
-	if doRender {
-		return a
-	}
-
-	return Attribute{}
-}
-
-func Attrs(attrs ...Attribute) Attributes {
-	return attrs
-}
-
-// Merge helps deal with repition of certain attributes, merging them into one.
-// At the moment, we deal with 'class' and 'style'
-func (attrs Attributes) Merge() Attributes {
-	var classes []string
-	var styles []string
-	var otherAttrs Attributes
-
-	for _, attr := range attrs {
-		switch attr.Name {
-		case class:
-			classes = append(classes, attr.Val)
-		case style:
-			styles = append(styles, attr.Val)
-		default:
-			otherAttrs = append(otherAttrs, attr)
-		}
-	}
-
-	return Attributes{}
-}
-
 type Element struct {
 	// Raw is basically a bypass, allowing for element creation from raw HTML
 	Raw string
 
 	Tag           string
-	Attributes    Attributes
+	Attributes    attributes.Attributes
 	Elements      []Element
 	Text          string
 	IsSelfClosing bool
@@ -129,7 +93,7 @@ func Els2(el1, el2 Element, els []Element) []Element {
 	return append(Els(el1, el2), els...)
 }
 
-func basicTag(tag string, attrs Attributes, elements []Element) Element {
+func basicTag(tag string, attrs attributes.Attributes, elements []Element) Element {
 	return Element{
 		Tag:        tag,
 		Elements:   elements,
@@ -137,7 +101,7 @@ func basicTag(tag string, attrs Attributes, elements []Element) Element {
 	}
 }
 
-func selfClosingTag(tag string, attrs Attributes) Element {
+func selfClosingTag(tag string, attrs attributes.Attributes) Element {
 	return Element{
 		Tag:           tag,
 		Attributes:    attrs,
@@ -151,87 +115,87 @@ func RawElement(b []byte) Element {
 	}
 }
 
-func Div(attrs Attributes, elements ...Element) Element {
+func Div(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(div, attrs, elements)
 }
 
-func P(attrs Attributes, elements ...Element) Element {
+func P(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(p, attrs, elements)
 }
 
-func A(attrs Attributes, elements ...Element) Element {
+func A(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(a, attrs, elements)
 }
 
-func Span(attrs Attributes, elements ...Element) Element {
+func Span(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(span, attrs, elements)
 }
 
-func Section(attrs Attributes, elements ...Element) Element {
+func Section(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(section, attrs, elements)
 }
 
-func Img(attrs Attributes) Element {
+func Img(attrs attributes.Attributes) Element {
 	return selfClosingTag(img, attrs)
 }
 
-func SVG(attrs Attributes, elements ...Element) Element {
+func SVG(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(svg, attrs, elements)
 }
 
-func Path(attrs Attributes) Element {
+func Path(attrs attributes.Attributes) Element {
 	return basicTag(path, attrs, []Element{})
 }
 
-func Polygon(attrs Attributes) Element {
+func Polygon(attrs attributes.Attributes) Element {
 	return basicTag(polygon, attrs, []Element{})
 }
 
-func Rect(attrs Attributes) Element {
+func Rect(attrs attributes.Attributes) Element {
 	return basicTag(rect, attrs, []Element{})
 }
 
-func Line(attrs Attributes) Element {
+func Line(attrs attributes.Attributes) Element {
 	return basicTag(line, attrs, []Element{})
 }
 
-func Circle(attrs Attributes) Element {
+func Circle(attrs attributes.Attributes) Element {
 	return basicTag(circle, attrs, []Element{})
 }
 
-func Br(_ Attributes) Element {
-	return selfClosingTag(br, []Attribute{})
+func Br(_ attributes.Attributes) Element {
+	return selfClosingTag(br, attributes.Attributes{})
 }
 
-func Nav(attrs Attributes, elements ...Element) Element {
+func Nav(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(nav, attrs, elements)
 }
 
-func Html(attrs Attributes, elements ...Element) Element {
+func Html(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(html, attrs, elements)
 }
 
-func Head(attrs Attributes, elements ...Element) Element {
+func Head(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(head, attrs, elements)
 }
 
-func Title(attrs Attributes, elements ...Element) Element {
+func Title(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(title, attrs, elements)
 }
 
-func Meta(attrs Attributes) Element {
+func Meta(attrs attributes.Attributes) Element {
 	return selfClosingTag(meta, attrs)
 }
 
-func Body(attrs Attributes, elements ...Element) Element {
+func Body(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(body, attrs, elements)
 }
 
-func Link(attrs Attributes) Element {
+func Link(attrs attributes.Attributes) Element {
 	return selfClosingTag(link, attrs)
 }
 
-func Script(attrs Attributes, elements ...Element) Element {
+func Script(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(script, attrs, elements)
 }
 
@@ -245,67 +209,67 @@ func Text(i interface{}) Element {
 // Nothing generates a blank element.  The only reason we have the arguments
 // is to make the funciton type signature the same as the other construction
 // functions
-func Nothing(_ Attributes, _ ...Element) Element {
+func Nothing(_ attributes.Attributes, _ ...Element) Element {
 	return Element{}
 }
 
-func Button(attrs Attributes, elements ...Element) Element {
+func Button(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(button, attrs, elements)
 }
 
-func Table(attrs Attributes, elements ...Element) Element {
+func Table(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(table, attrs, elements)
 }
 
-func THead(attrs Attributes, elements ...Element) Element {
+func THead(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(thead, attrs, elements)
 }
 
-func TBody(attrs Attributes, elements ...Element) Element {
+func TBody(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(tbody, attrs, elements)
 }
 
-func Tr(attrs Attributes, elements ...Element) Element {
+func Tr(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(tr, attrs, elements)
 }
 
-func Th(attrs Attributes, elements ...Element) Element {
+func Th(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(th, attrs, elements)
 }
 
-func Td(attrs Attributes, elements ...Element) Element {
+func Td(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(td, attrs, elements)
 }
 
-func H1(attrs Attributes, elements ...Element) Element {
+func H1(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(h1, attrs, elements)
 }
 
-func H2(attrs Attributes, elements ...Element) Element {
+func H2(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(h2, attrs, elements)
 }
 
-func H3(attrs Attributes, elements ...Element) Element {
+func H3(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(h3, attrs, elements)
 }
 
-func H4(attrs Attributes, elements ...Element) Element {
+func H4(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(h4, attrs, elements)
 }
 
-func H5(attrs Attributes, elements ...Element) Element {
+func H5(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(h5, attrs, elements)
 }
 
-func H6(attrs Attributes, elements ...Element) Element {
+func H6(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(h6, attrs, elements)
 }
-func Ul(attrs Attributes, elements ...Element) Element {
+func Ul(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(ul, attrs, elements)
 }
-func Ol(attrs Attributes, elements ...Element) Element {
+func Ol(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(ol, attrs, elements)
 }
-func Li(attrs Attributes, elements ...Element) Element {
+func Li(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(li, attrs, elements)
 }
