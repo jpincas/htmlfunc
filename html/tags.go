@@ -13,6 +13,7 @@ const (
 	head    = "head"
 	text    = "text"
 	div     = "div"
+	style   = "style"
 	p       = "p"
 	meta    = "meta"
 	link    = "link"
@@ -61,6 +62,10 @@ func A(attrs attributes.Attributes, elements ...Element) Element {
 
 func Span(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(span, attrs, elements)
+}
+
+func Style(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(style, attrs, elements)
 }
 
 func Section(attrs attributes.Attributes, elements ...Element) Element {
