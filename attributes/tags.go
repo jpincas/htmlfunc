@@ -26,6 +26,7 @@ const (
 	onclick   = "onclick"
 	xmlns     = "xmlns"
 	style     = "style"
+	async     = "async"
 
 	cellPadding = "cellpadding"
 	cellSpacing = "cellspacing"
@@ -153,6 +154,10 @@ func Src(s string) Attribute {
 
 func Defer() Attribute {
 	return booleanAttribute(defer_)
+}
+
+func Async() Attribute {
+	return booleanAttribute(async)
 }
 
 func Role(s string) Attribute {

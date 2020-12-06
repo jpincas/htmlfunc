@@ -19,6 +19,11 @@ func TestOutput(t *testing.T) {
 			),
 			Text("SPAN"),
 		),
+		Script(
+			attributes.Attrs(
+				attributes.Async(),
+			),
+		),
 		Div(
 			attributes.Attrs(
 				// Duplicate 'class' and 'style' declarations
@@ -46,6 +51,8 @@ func TestOutput(t *testing.T) {
   <span class="two classes duplicate-class-declaration">
     SPAN
   </span>
+  <script async>
+  </script>
   <div class="should-appear" style="color:white;font-weight:bold;font-size:14px">
     <h1>
       H1
