@@ -26,7 +26,9 @@ const (
 	onclick   = "onclick"
 	xmlns     = "xmlns"
 	style     = "style"
+	sizes     = "sizes"
 	async     = "async"
+	property  = "property"
 
 	cellPadding = "cellpadding"
 	cellSpacing = "cellspacing"
@@ -82,6 +84,14 @@ func Class(s string) Attribute {
 
 func Title(s string) Attribute {
 	return regularAttribute(title, s)
+}
+
+func Sizes(s string) Attribute {
+	return regularAttribute(sizes, s)
+}
+
+func Property(s string) Attribute {
+	return regularAttribute(property, s)
 }
 
 // ClassesIf takes a list of classes to apply according to a corresponding list
