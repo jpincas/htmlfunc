@@ -11,6 +11,7 @@ const (
 	title   = "title"
 	body    = "body"
 	head    = "head"
+	text    = "text"
 	div     = "div"
 	p       = "p"
 	meta    = "meta"
@@ -46,75 +47,6 @@ const (
 	li      = "li"
 )
 
-type Element struct {
-	// Raw is basically a bypass, allowing for element creation from raw HTML
-	Raw string
-
-	Tag           string
-	Attributes    attributes.Attributes
-	Elements      []Element
-	Text          string
-	IsSelfClosing bool
-}
-
-func (el Element) RenderIf(doRender bool) Element {
-	if doRender {
-		return el
-	}
-
-	return Element{}
-}
-
-func (el Element) RenderIfWithDefault(doRender bool, d Element) Element {
-	if doRender {
-		return el
-	}
-
-	return d
-}
-
-func (el Element) IsEmpty() bool {
-	return el.Text == "" && len(el.Elements) == 0
-}
-
-func Els(els ...Element) []Element {
-	return els
-}
-
-//Els1 is a convenience function to combine a single element then a list (which you can't do with
-// the standard spread syntax)
-func Els1(el Element, els []Element) []Element {
-	return append(Els(el), els...)
-}
-
-//Els2 is a convenience function to combine two single elements, then a list (which you can't do with
-// the standard spread syntax)
-func Els2(el1, el2 Element, els []Element) []Element {
-	return append(Els(el1, el2), els...)
-}
-
-func basicTag(tag string, attrs attributes.Attributes, elements []Element) Element {
-	return Element{
-		Tag:        tag,
-		Elements:   elements,
-		Attributes: attrs,
-	}
-}
-
-func selfClosingTag(tag string, attrs attributes.Attributes) Element {
-	return Element{
-		Tag:           tag,
-		Attributes:    attrs,
-		IsSelfClosing: true,
-	}
-}
-
-func RawElement(b []byte) Element {
-	return Element{
-		Raw: string(b),
-	}
-}
-
 func Div(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(div, attrs, elements)
 }
@@ -144,23 +76,23 @@ func SVG(attrs attributes.Attributes, elements ...Element) Element {
 }
 
 func Path(attrs attributes.Attributes) Element {
-	return basicTag(path, attrs, []Element{})
+	return basicTag(path, attrs, Elements{})
 }
 
 func Polygon(attrs attributes.Attributes) Element {
-	return basicTag(polygon, attrs, []Element{})
+	return basicTag(polygon, attrs, Elements{})
 }
 
 func Rect(attrs attributes.Attributes) Element {
-	return basicTag(rect, attrs, []Element{})
+	return basicTag(rect, attrs, Elements{})
 }
 
 func Line(attrs attributes.Attributes) Element {
-	return basicTag(line, attrs, []Element{})
+	return basicTag(line, attrs, Elements{})
 }
 
 func Circle(attrs attributes.Attributes) Element {
-	return basicTag(circle, attrs, []Element{})
+	return basicTag(circle, attrs, Elements{})
 }
 
 func Br(_ attributes.Attributes) Element {
@@ -201,7 +133,7 @@ func Script(attrs attributes.Attributes, elements ...Element) Element {
 
 func Text(i interface{}) Element {
 	return Element{
-		Tag:  "text",
+		Tag:  text,
 		Text: fmt.Sprintf("%v", i),
 	}
 }
