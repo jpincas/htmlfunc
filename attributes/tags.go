@@ -20,6 +20,7 @@ const (
 	type_     = "type"
 	defer_    = "defer"
 	src       = "src"
+        onload    = "onload"
 	role      = "role"
 	width     = "width"
 	height    = "height"
@@ -160,6 +161,10 @@ func Type(s string) Attribute {
 
 func Src(s string) Attribute {
 	return regularAttribute(src, s)
+}
+
+func OnLoad(s string) Attribute {
+        return regularAttribute(onload, s)
 }
 
 func Defer() Attribute {
