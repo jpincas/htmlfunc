@@ -2,6 +2,7 @@ package html
 
 import (
 	"fmt"
+	"io"
 	"strings"
 
 	"github.com/jpincas/htmlfunc/attributes"
@@ -84,6 +85,16 @@ func (el Element) DocString() string {
 func (el Element) DocStringWithOptions(docOptions string) string {
 	renderedElement, _ := el.Output(0)
 	return fmt.Sprintf("<!DOCTYPE html %s>\n%s", docOptions, renderedElement)
+}
+
+func (el Element) WriteDoc(w io.Writer) error {
+	_, err := w.Write(el.DocBytes())
+	return err
+}
+
+func (el Element) WriteDocWithOptions(w io.Writer, docOptions string) error {
+	_, err := w.Write(el.DocBytesWithOptions(docOptions))
+	return err
 }
 
 // Elements

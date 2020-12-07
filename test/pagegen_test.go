@@ -78,7 +78,7 @@ func TestPageGen(t *testing.T) {
 			table,
 		)
 
-	doc :=
+	el :=
 		h.Html(
 			a.Attrs(a.Lang("en")),
 			head,
@@ -92,7 +92,7 @@ func TestPageGen(t *testing.T) {
 		t.Fatal("Could not create index.html")
 	}
 
-	if _, err := f.Write(doc.DocBytes()); err != nil {
+	if err := el.WriteDoc(f); err != nil {
 		t.Fatal("Could not write to index.html: ", err)
 	}
 }
