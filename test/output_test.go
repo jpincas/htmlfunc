@@ -3,7 +3,6 @@ package test
 import (
 	"testing"
 
-	"github.com/jpincas/htmlfunc"
 	a "github.com/jpincas/htmlfunc/attributes"
 	h "github.com/jpincas/htmlfunc/html"
 )
@@ -16,7 +15,7 @@ func TestRenderDoc(t *testing.T) {
 		h.Text("TEST"),
 	)
 
-	output := htmlfunc.RenderDoc(el)
+	output := el.DocString()
 	expected := `<!DOCTYPE html>
 <div class="test">
   TEST

@@ -4,7 +4,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jpincas/htmlfunc"
 	a "github.com/jpincas/htmlfunc/attributes"
 	"github.com/jpincas/htmlfunc/css"
 	"github.com/jpincas/htmlfunc/html"
@@ -93,7 +92,7 @@ func TestPageGen(t *testing.T) {
 		t.Fatal("Could not create index.html")
 	}
 
-	if _, err := f.Write(htmlfunc.WriteDoc(doc)); err != nil {
+	if _, err := f.Write(doc.DocBytes()); err != nil {
 		t.Fatal("Could not write to index.html: ", err)
 	}
 }

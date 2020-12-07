@@ -63,6 +63,29 @@ func (el Element) String() string {
 	return s
 }
 
+func (el Element) Bytes() []byte {
+	renderedElement, _ := el.Output(0)
+	return []byte(renderedElement)
+}
+
+func (el Element) DocBytes() []byte {
+	return []byte(el.DocString())
+}
+
+func (el Element) DocBytesWithOptions(docOptions string) []byte {
+	return []byte(el.DocStringWithOptions(docOptions))
+}
+
+func (el Element) DocString() string {
+	renderedElement, _ := el.Output(0)
+	return fmt.Sprintf("<!DOCTYPE html>\n%s", renderedElement)
+}
+
+func (el Element) DocStringWithOptions(docOptions string) string {
+	renderedElement, _ := el.Output(0)
+	return fmt.Sprintf("<!DOCTYPE html %s>\n%s", docOptions, renderedElement)
+}
+
 // Elements
 
 type Elements []Element
