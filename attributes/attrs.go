@@ -72,6 +72,18 @@ func Attrs(attrs ...Attribute) Attributes {
 	return attrs
 }
 
+//Attrs1 is a convenience function to combine a single element then a list (which you can't do with
+// the standard spread syntax)
+func Attrs1(attr Attribute, attrs Attributes) Attributes {
+	return append(Attrs(attr), attrs...)
+}
+
+//Attrs2 is a convenience function to combine two single elements, then a list (which you can't do with
+// the standard spread syntax)
+func Attrs2(attr1, attr2 Attribute, attrs Attributes) Attributes {
+	return append(Attrs(attr1, attr2), attrs...)
+}
+
 // Merge helps deal with repition of certain attributes, merging them into one.
 // At the moment, we deal with 'class' and 'style'
 func (attrs Attributes) MergeDuplicates() Attributes {
