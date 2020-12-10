@@ -106,7 +106,8 @@ const (
 
 var (
 	// Font Family Stack
-	FontFamilyHelvetica = Fonts([]string{"Helvetica Neue", "Helvetica", "Arial", "sans-serif"})
+	FontFamilyHelvetica  = Fonts([]string{"Helvetica Neue", "Helvetica", "Arial", "sans-serif"})
+	FontFamilyCourierNew = Fonts([]string{"Courier New", "monospace"})
 )
 
 type KeyValuePair struct {
