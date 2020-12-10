@@ -15,6 +15,7 @@ func ConstructTable(attrs attributes.Attributes, headerRow []string, rows []h.El
 }
 
 type ComplexTable struct {
+	FirstColumnIsTitle                     bool
 	HeaderRow                              []string
 	Rows                                   []h.Elements
 	GlobalAttrs                            attributes.Attributes
@@ -37,7 +38,7 @@ func (complexTable ComplexTable) Render() h.Element {
 		tableCells := h.Els()
 		var cellAttrs, rowAttrs attributes.Attributes
 
-		if i < (len(complexTable.Rows) - 1) {
+		if i < (len(complexTable.Rows)-1) || len(complexTable.Rows) == 1 {
 			cellAttrs = complexTable.BodyCellAttrs
 			rowAttrs = complexTable.BodyRowAttrs
 		} else {
@@ -45,8 +46,13 @@ func (complexTable ComplexTable) Render() h.Element {
 			rowAttrs = complexTable.LastRowAttrs
 		}
 
-		for _, cellValue := range row {
-			tableCells = append(tableCells, h.Td(cellAttrs, cellValue))
+		for i, cellValue := range row {
+			cellFunc := h.Td
+			if i == 0 {
+				cellFunc = h.Th
+			}
+
+			tableCells = append(tableCells, cellFunc(cellAttrs, cellValue))
 		}
 
 		bodyRows = append(bodyRows, h.Tr(rowAttrs, tableCells...))

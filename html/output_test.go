@@ -32,6 +32,7 @@ func TestOutput(t *testing.T) {
 				attributes.Style(css.Color("white"), css.FontWeight(css.Bold)),
 				attributes.Style(css.FontSize(css.WithUnits(14, css.Px))),
 			),
+			Text("<escaping>"),
 			H1(attributes.Attrs(), Text("H1")),
 			H2(attributes.Attrs(), Text("H2")),
 		),
@@ -54,6 +55,7 @@ func TestOutput(t *testing.T) {
   <script async>
   </script>
   <div class="should-appear" style="color:white;font-weight:bold;font-size:14px">
+    &lt;escaping&gt;
     <h1>
       H1
     </h1>

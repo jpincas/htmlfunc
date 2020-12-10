@@ -2,6 +2,7 @@ package html
 
 import (
 	"fmt"
+	"html/template"
 	"io"
 	"strings"
 
@@ -36,7 +37,7 @@ func (el Element) Output(tabs int) (string, bool) {
 	}
 
 	if el.Tag == text {
-		return fmt.Sprintf("%s%s\n", t, el.Text), true
+		return fmt.Sprintf("%s%s\n", t, template.HTMLEscapeString(el.Text)), true
 	}
 
 	if el.IsSelfClosing {
