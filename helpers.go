@@ -6,17 +6,17 @@ import (
 )
 
 // ConstructTable is for quickly constructing simple tables with global attributes
-func ConstructTable(attrs attributes.Attributes, headerRow []string, rows [][]h.Element) h.Element {
-	return ConstructComplexTable(ComplexTable{
+func ConstructTable(attrs attributes.Attributes, headerRow []string, rows []h.Elements) h.Element {
+	return ComplexTable{
 		GlobalAttrs: attrs,
 		HeaderRow:   headerRow,
 		Rows:        rows,
-	})
+	}.Render()
 }
 
 type ComplexTable struct {
 	HeaderRow                              []string
-	Rows                                   [][]h.Element
+	Rows                                   []h.Elements
 	GlobalAttrs                            attributes.Attributes
 	HeadAttrs, HeadRowAttrs, HeadCellAttrs attributes.Attributes
 	LastRowAttrs, LastRowCellAttrs         attributes.Attributes
@@ -25,7 +25,7 @@ type ComplexTable struct {
 
 // ConstructComplexTable is for constructing more complex tables with inline attributes
 // at every level.  Useful, for example, for tables in HTML emails
-func (ct ComplexTable) Render() {
+func (complexTable ComplexTable) Render() h.Element {
 	headerCells := h.Els()
 	for _, columnHeading := range complexTable.HeaderRow {
 		headerCells = append(headerCells, h.Th(complexTable.HeadCellAttrs, h.Text(columnHeading)))
