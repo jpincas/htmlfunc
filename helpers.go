@@ -25,7 +25,7 @@ type ComplexTable struct {
 
 // ConstructComplexTable is for constructing more complex tables with inline attributes
 // at every level.  Useful, for example, for tables in HTML emails
-func ConstructComplexTable(complexTable ComplexTable) h.Element {
+func (ct ComplexTable) Render() {
 	headerCells := h.Els()
 	for _, columnHeading := range complexTable.HeaderRow {
 		headerCells = append(headerCells, h.Th(complexTable.HeadCellAttrs, h.Text(columnHeading)))
