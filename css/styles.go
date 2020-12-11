@@ -55,6 +55,7 @@ const (
 	opacity       = "opacity"
 	listStyle     = "list-style"
 	verticalAlign = "vertical-align"
+	tableLayout   = "table-layout"
 
 	pageBreakBefore = "page-break-before"
 )
@@ -102,6 +103,8 @@ const (
 	TextBottom = "text-bottom"
 	Initial    = "initial"
 	Inherit    = "inherit"
+
+	Fixed = "fixed"
 )
 
 var (
@@ -349,4 +352,8 @@ func PageBreakBefore(s string, include ...bool) KeyValuePair {
 
 func VerticalAlign(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(verticalAlign, s, include...)
+}
+
+func TableLayout(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(tableLayout, s, include...)
 }

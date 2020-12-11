@@ -20,7 +20,7 @@ const (
 	type_     = "type"
 	defer_    = "defer"
 	src       = "src"
-        onload    = "onload"
+	onload    = "onload"
 	role      = "role"
 	width     = "width"
 	height    = "height"
@@ -57,6 +57,8 @@ const (
 	cx = "cx"
 	cy = "cy"
 	r  = "r"
+
+	colSpan = "colspan"
 )
 
 const (
@@ -164,7 +166,7 @@ func Src(s string) Attribute {
 }
 
 func OnLoad(s string) Attribute {
-        return regularAttribute(onload, s)
+	return regularAttribute(onload, s)
 }
 
 func Defer() Attribute {
@@ -179,12 +181,12 @@ func Role(s string) Attribute {
 	return regularAttribute(role, s)
 }
 
-func Width(i int) Attribute {
-	return intAttribute(width, i)
+func Width(s string) Attribute {
+	return regularAttribute(width, s)
 }
 
-func Height(i int) Attribute {
-	return intAttribute(height, i)
+func Height(s string) Attribute {
+	return regularAttribute(height, s)
 }
 
 func OnClick(s string) Attribute {
@@ -281,4 +283,8 @@ func CY(i int) Attribute {
 
 func R(i int) Attribute {
 	return intAttribute(r, i)
+}
+
+func ColSpan(i int) Attribute {
+	return intAttribute(colSpan, i)
 }
