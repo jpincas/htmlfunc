@@ -121,9 +121,21 @@ func (els Elements) Output(tabs int) string {
 func (els Elements) String() string {
 	return els.Output(0)
 }
+
 func renderNTabs(n int) (res string) {
 	for i := 0; i < n; i++ {
 		res = res + "  "
+	}
+
+	return
+}
+
+// FlattenElementList flattens a list of lists of elements into a single list
+func FlattenElementsList(elementList []Elements) (res Elements) {
+	for _, els := range elementList {
+		for _, el := range els {
+			res = append(res, el)
+		}
 	}
 
 	return

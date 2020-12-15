@@ -21,6 +21,7 @@ type ComplexTable struct {
 	GlobalAttrs                            attributes.Attributes
 	HeadAttrs, HeadRowAttrs, HeadCellAttrs attributes.Attributes
 	LastRowAttrs, LastRowCellAttrs         attributes.Attributes
+	FirstColumnCellAttrs                   attributes.Attributes
 	BodyAttrs, BodyRowAttrs, BodyCellAttrs attributes.Attributes
 }
 
@@ -47,12 +48,11 @@ func (complexTable ComplexTable) Render() h.Element {
 		}
 
 		for i, cellValue := range row {
-			cellFunc := h.Td
 			if i == 0 {
-				cellFunc = h.Th
+				cellAttrs = complexTable.FirstColumnCellAttrs
 			}
 
-			tableCells = append(tableCells, cellFunc(cellAttrs, cellValue))
+			tableCells = append(tableCells, h.Td(cellAttrs, cellValue))
 		}
 
 		bodyRows = append(bodyRows, h.Tr(rowAttrs, tableCells...))
