@@ -48,11 +48,12 @@ func (complexTable ComplexTable) Render() h.Element {
 		}
 
 		for i, cellValue := range row {
+			cellAttrs_ := cellAttrs
 			if i == 0 {
-				cellAttrs = complexTable.FirstColumnCellAttrs
+				cellAttrs_ = complexTable.FirstColumnCellAttrs
 			}
 
-			tableCells = append(tableCells, h.Td(cellAttrs, cellValue))
+			tableCells = append(tableCells, h.Td(cellAttrs_, cellValue))
 		}
 
 		bodyRows = append(bodyRows, h.Tr(rowAttrs, tableCells...))

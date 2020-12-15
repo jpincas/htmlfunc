@@ -81,6 +81,11 @@ func Style(styles ...css.KeyValuePair) Attribute {
 	return regularAttribute(style, css.PrintStyles(includedStyles))
 }
 
+func Style1(style css.KeyValuePair, styles ...css.KeyValuePair) Attribute {
+	ss := append(styles, style)
+	return Style(ss...)
+}
+
 func Class(s string) Attribute {
 	return regularAttribute(class, s)
 }
