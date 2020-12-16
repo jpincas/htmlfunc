@@ -84,6 +84,14 @@ func Attrs2(attr1, attr2 Attribute, attrs Attributes) Attributes {
 	return append(Attrs(attr1, attr2), attrs...)
 }
 
+func Attrs3(attr1, attr2, attr3 Attribute, attrs Attributes) Attributes {
+	return append(Attrs(attr1, attr2, attr3), attrs...)
+}
+
+func Attrs4(attr1, attr2, attr3, attr4 Attribute, attrs Attributes) Attributes {
+	return append(Attrs(attr1, attr2, attr3, attr4), attrs...)
+}
+
 // Merge helps deal with repition of certain attributes, merging them into one.
 // At the moment, we deal with 'class' and 'style'
 func (attrs Attributes) MergeDuplicates() Attributes {
