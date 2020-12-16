@@ -173,6 +173,36 @@ func (el Element) RenderIfWithDefault(doRender bool, d Element) Element {
 	return d
 }
 
+// Join separates HTML elements with the specifid separator
+func (els Elements) Join(sep h.Element) (res []h.Element) {
+	for _, el := range els {
+		res = append(res, el, sep)
+	}
+
+	// remove the final separator
+	if len(res) > 0 {
+		res = res[:len(res)-1]
+	}
+
+	return
+}
+
+// JoinIf separates HTML elements with the specifid separator, if they are non blank
+func (els Elements) JoinIf(sep h.Element) (res []h.Element) {
+	for _, el := range els {
+		if !el.IsEmpty() {
+			res = append(res, el, sep)
+		}
+	}
+
+	// remove the final separator
+	if len(res) > 0 {
+		res = res[:len(res)-1]
+	}
+
+	return
+}
+
 // IsEmpty specifies whether this is a 'blank' element
 func (el Element) IsEmpty() bool {
 	return el.Text == "" && len(el.Elements) == 0
