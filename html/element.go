@@ -174,7 +174,7 @@ func (el Element) RenderIfWithDefault(doRender bool, d Element) Element {
 }
 
 // Join separates HTML elements with the specifid separator
-func (els Elements) Join(sep h.Element) (res []h.Element) {
+func (els Elements) Join(sep Element) (res Elements) {
 	for _, el := range els {
 		res = append(res, el, sep)
 	}
@@ -188,7 +188,7 @@ func (els Elements) Join(sep h.Element) (res []h.Element) {
 }
 
 // JoinIf separates HTML elements with the specifid separator, if they are non blank
-func (els Elements) JoinIf(sep h.Element) (res []h.Element) {
+func (els Elements) JoinIf(sep Element) (res Elements) {
 	for _, el := range els {
 		if !el.IsEmpty() {
 			res = append(res, el, sep)
