@@ -37,6 +37,7 @@ const (
 	paddingBottom = "padding-bottom"
 
 	justifyContent = "justify-content"
+	flexDirection  = "flex-direction"
 	alignItems     = "align-items"
 	textAlign      = "text-align"
 	textDecoration = "text-decoration"
@@ -72,6 +73,7 @@ const (
 	Cm      = "cm"
 	Mm      = "mm"
 	Rem     = "rem"
+	Vh      = "vh"
 
 	Bold = "bold"
 
@@ -80,6 +82,7 @@ const (
 	Auto         = "auto"
 	Flex         = "flex"
 	Center       = "center"
+	Column       = "column"
 	Right        = "right"
 	Left         = "left"
 	SpaceBetween = "space-between"
@@ -276,6 +279,10 @@ func PaddingVertHoriz(vertical, horiztonal string, include ...bool) KeyValuePair
 
 func FlexWrap(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(flexWrap, s, include...)
+}
+
+func FlexDirection(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(flexDirection, s, include...)
 }
 
 func LineHeight(s string, include ...bool) KeyValuePair {

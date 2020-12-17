@@ -7,29 +7,32 @@ import (
 )
 
 const (
-	id        = "id"
-	class     = "class"
-	title     = "title"
-	lang      = "lang"
-	charset   = "charset"
-	name      = "name"
-	content   = "content"
-	httpEquiv = "http-equiv"
-	rel       = "rel"
-	href      = "href"
-	type_     = "type"
-	defer_    = "defer"
-	src       = "src"
-	onload    = "onload"
-	role      = "role"
-	width     = "width"
-	height    = "height"
-	onclick   = "onclick"
-	xmlns     = "xmlns"
-	style     = "style"
-	sizes     = "sizes"
-	async     = "async"
-	property  = "property"
+	id           = "id"
+	class        = "class"
+	title        = "title"
+	lang         = "lang"
+	charset      = "charset"
+	name         = "name"
+	content      = "content"
+	httpEquiv    = "http-equiv"
+	rel          = "rel"
+	href         = "href"
+	type_        = "type"
+	defer_       = "defer"
+	src          = "src"
+	alt          = "alt"
+	onload       = "onload"
+	role         = "role"
+	width        = "width"
+	height       = "height"
+	onclick      = "onclick"
+	xmlns        = "xmlns"
+	style        = "style"
+	sizes        = "sizes"
+	async        = "async"
+	property     = "property"
+	placeholder  = "placeholder"
+	autocomplete = "autocomplete"
 
 	cellPadding = "cellpadding"
 	cellSpacing = "cellspacing"
@@ -102,6 +105,14 @@ func Property(s string) Attribute {
 	return regularAttribute(property, s)
 }
 
+func Placeholder(s string) Attribute {
+	return regularAttribute(placeholder, s)
+}
+
+func Autocomplete(s string) Attribute {
+	return regularAttribute(autocomplete, s)
+}
+
 // ClassesIf takes a list of classes to apply according to a corresponding list
 // of booleans.  If more classes than appliers are provided, then extra
 // classes are automatically applied, which is a convenient way to provide
@@ -168,6 +179,10 @@ func Type(s string) Attribute {
 
 func Src(s string) Attribute {
 	return regularAttribute(src, s)
+}
+
+func Alt(s string) Attribute {
+	return regularAttribute(alt, s)
 }
 
 func OnLoad(s string) Attribute {

@@ -46,10 +46,25 @@ const (
 	ul      = "ul"
 	ol      = "ol"
 	li      = "li"
+	header  = "header"
+	form    = "form"
+	input   = "input"
 )
 
 func Div(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(div, attrs, elements)
+}
+
+func Header(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(header, attrs, elements)
+}
+
+func Form(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(form, attrs, elements)
+}
+
+func Input(attrs attributes.Attributes) Element {
+	return selfClosingTag(input, attrs)
 }
 
 func P(attrs attributes.Attributes, elements ...Element) Element {
