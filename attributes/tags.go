@@ -21,11 +21,12 @@ const (
 	defer_       = "defer"
 	src          = "src"
 	alt          = "alt"
-	onload       = "onload"
+	as           = "as"
 	role         = "role"
 	width        = "width"
 	height       = "height"
 	onclick      = "onclick"
+	onload       = "onload"
 	xmlns        = "xmlns"
 	style        = "style"
 	sizes        = "sizes"
@@ -33,6 +34,7 @@ const (
 	property     = "property"
 	placeholder  = "placeholder"
 	autocomplete = "autocomplete"
+	media        = "media"
 
 	cellPadding = "cellpadding"
 	cellSpacing = "cellspacing"
@@ -183,6 +185,14 @@ func Src(s string) Attribute {
 
 func Alt(s string) Attribute {
 	return regularAttribute(alt, s)
+}
+
+func As(s string) Attribute {
+	return regularAttribute(as, s)
+}
+
+func Media(s string) Attribute {
+	return regularAttribute(media, s)
 }
 
 func OnLoad(s string) Attribute {
