@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"net/http"
 	"strings"
 
 	"github.com/jpincas/htmlfunc/attributes"
@@ -96,6 +97,21 @@ func (el Element) WriteDoc(w io.Writer) error {
 func (el Element) WriteDocWithOptions(w io.Writer, docOptions string) error {
 	_, err := w.Write(el.DocBytesWithOptions(docOptions))
 	return err
+}
+
+const (
+	contentType = "Content-Type"
+	textHtml    = "text/html; charset=utf-8"
+)
+
+func (el Element) ServeDoc(w http.ResponseWriter) error {
+	w.Header().Set(contentType, textHtml)
+	return el.WriteDoc(w)
+}
+
+func (el Element) ServeDocWithOptions(w http.ResponseWriter, docOptions string) error {
+	w.Header().Set(contentType, textHtml)
+	return el.WriteDocWithOptions(w, docOptions)
 }
 
 // Elements
