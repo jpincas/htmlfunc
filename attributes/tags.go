@@ -1,6 +1,7 @@
 package attributes
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/jpincas/htmlfunc/css"
@@ -35,6 +36,8 @@ const (
 	placeholder  = "placeholder"
 	autocomplete = "autocomplete"
 	media        = "media"
+	integrity    = "integrity"
+	crossOrigin  = "crossorigin"
 
 	cellPadding = "cellpadding"
 	cellSpacing = "cellspacing"
@@ -64,6 +67,12 @@ const (
 	r  = "r"
 
 	colSpan = "colspan"
+
+	method   = "method"
+	action   = "action"
+	pattern  = "pattern"
+	required = "required"
+	value    = "value"
 )
 
 const (
@@ -109,6 +118,26 @@ func Property(s string) Attribute {
 
 func Placeholder(s string) Attribute {
 	return regularAttribute(placeholder, s)
+}
+
+func Method(s string) Attribute {
+	return regularAttribute(method, s)
+}
+
+func Action(s string) Attribute {
+	return regularAttribute(action, s)
+}
+
+func Pattern(s string) Attribute {
+	return regularAttribute(pattern, s)
+}
+
+func Value(s string) Attribute {
+	return regularAttribute(value, s)
+}
+
+func Data(suffix, s string) Attribute {
+	return regularAttribute(fmt.Sprintf("data-%s", suffix), s)
 }
 
 func Autocomplete(s string) Attribute {
@@ -163,6 +192,14 @@ func Content(s string) Attribute {
 	return regularAttribute(content, s)
 }
 
+func Integrity(s string) Attribute {
+	return regularAttribute(integrity, s)
+}
+
+func CrossOrigin(s string) Attribute {
+	return regularAttribute(crossOrigin, s)
+}
+
 func HttpEquiv(s string) Attribute {
 	return regularAttribute(httpEquiv, s)
 }
@@ -205,6 +242,10 @@ func Defer() Attribute {
 
 func Async() Attribute {
 	return booleanAttribute(async)
+}
+
+func Required() Attribute {
+	return booleanAttribute(required)
 }
 
 func Role(s string) Attribute {

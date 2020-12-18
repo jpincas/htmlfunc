@@ -13,12 +13,14 @@ const (
 	head    = "head"
 	text    = "text"
 	div     = "div"
+	strong  = "strong"
 	style   = "style"
 	p       = "p"
 	meta    = "meta"
 	link    = "link"
 	script  = "script"
 	a       = "a"
+	i       = "i"
 	nav     = "nav"
 	span    = "span"
 	section = "section"
@@ -37,6 +39,7 @@ const (
 	td      = "td"
 	tbody   = "tbody"
 	thead   = "thead"
+	hr      = "hr"
 	h1      = "h1"
 	h2      = "h2"
 	h3      = "h3"
@@ -49,6 +52,7 @@ const (
 	header  = "header"
 	form    = "form"
 	input   = "input"
+	label   = "label"
 )
 
 func Div(attrs attributes.Attributes, elements ...Element) Element {
@@ -73,6 +77,14 @@ func P(attrs attributes.Attributes, elements ...Element) Element {
 
 func A(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(a, attrs, elements)
+}
+
+func I(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(i, attrs, elements)
+}
+
+func Label(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(label, attrs, elements)
 }
 
 func Span(attrs attributes.Attributes, elements ...Element) Element {
@@ -135,6 +147,10 @@ func Title(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(title, attrs, elements)
 }
 
+func Strong(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(strong, attrs, elements)
+}
+
 func Meta(attrs attributes.Attributes) Element {
 	return selfClosingTag(meta, attrs)
 }
@@ -191,6 +207,10 @@ func Th(attrs attributes.Attributes, elements ...Element) Element {
 
 func Td(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(td, attrs, elements)
+}
+
+func Hr(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(hr, attrs, elements)
 }
 
 func H1(attrs attributes.Attributes, elements ...Element) Element {
