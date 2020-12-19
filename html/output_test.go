@@ -21,7 +21,12 @@ func TestOutput(t *testing.T) {
 		),
 		Script(
 			attributes.Attrs(
-				attributes.Async(),
+				attributes.Async(true),
+			),
+		),
+		Script(
+			attributes.Attrs(
+				attributes.Async(false),
 			),
 		),
 		Div(
@@ -53,6 +58,8 @@ func TestOutput(t *testing.T) {
     SPAN
   </span>
   <script async>
+  </script>
+  <script>
   </script>
   <div class="should-appear" style="color:white;font-weight:bold;font-size:14px">
     &lt;escaping&gt;

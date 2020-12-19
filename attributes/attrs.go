@@ -129,11 +129,11 @@ func regularAttribute(k, v string) Attribute {
 	}
 }
 
-func booleanAttribute(k string) Attribute {
+func booleanAttribute(k string, b bool) Attribute {
 	return Attribute{
 		Name:   k,
 		IsBool: true,
-	}
+	}.RenderIf(b)
 }
 
 func intAttribute(k string, v int) Attribute {

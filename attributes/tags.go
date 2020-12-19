@@ -243,24 +243,24 @@ func OnLoad(s string) Attribute {
 	return regularAttribute(onload, s)
 }
 
-func Defer() Attribute {
-	return booleanAttribute(defer_)
+func Defer(b bool) Attribute {
+	return booleanAttribute(defer_, b)
 }
 
-func Async() Attribute {
-	return booleanAttribute(async)
+func Async(b bool) Attribute {
+	return booleanAttribute(async, b)
 }
 
-func Required() Attribute {
-	return booleanAttribute(required)
+func Required(b bool) Attribute {
+	return booleanAttribute(required, b)
 }
 
-func Disabled() Attribute {
-	return booleanAttribute(disabled)
+func Disabled(b bool) Attribute {
+	return booleanAttribute(disabled, b)
 }
 
-func Checked() Attribute {
-	return booleanAttribute(checked)
+func Checked(b bool) Attribute {
+	return booleanAttribute(checked, b)
 }
 
 func Role(s string) Attribute {
