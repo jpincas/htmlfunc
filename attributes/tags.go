@@ -23,6 +23,7 @@ const (
 	src          = "src"
 	alt          = "alt"
 	as           = "as"
+	target       = "target"
 	role         = "role"
 	width        = "width"
 	height       = "height"
@@ -79,6 +80,7 @@ const (
 
 const (
 	Round = "round"
+	Blank = "_blank"
 )
 
 func Style(styles ...css.KeyValuePair) Attribute {
@@ -113,6 +115,10 @@ func ClassIf(s string, b bool) Attribute {
 
 func Title(s string) Attribute {
 	return regularAttribute(title, s)
+}
+
+func Target(s string) Attribute {
+	return regularAttribute(target, s)
 }
 
 func Sizes(s string) Attribute {
