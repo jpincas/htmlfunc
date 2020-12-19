@@ -32,6 +32,8 @@ const (
 	style        = "style"
 	sizes        = "sizes"
 	async        = "async"
+	disabled     = "disabled"
+	checked      = "checked"
 	property     = "property"
 	placeholder  = "placeholder"
 	autocomplete = "autocomplete"
@@ -102,6 +104,11 @@ func Style1(style css.KeyValuePair, styles ...css.KeyValuePair) Attribute {
 
 func Class(s string) Attribute {
 	return regularAttribute(class, s)
+}
+
+// ClassIf is a shortcut for Class().RenderIf()
+func ClassIf(s string, b bool) Attribute {
+	return regularAttribute(class, s).RenderIf(b)
 }
 
 func Title(s string) Attribute {
@@ -246,6 +253,14 @@ func Async() Attribute {
 
 func Required() Attribute {
 	return booleanAttribute(required)
+}
+
+func Disabled() Attribute {
+	return booleanAttribute(disabled)
+}
+
+func Checked() Attribute {
+	return booleanAttribute(checked)
 }
 
 func Role(s string) Attribute {

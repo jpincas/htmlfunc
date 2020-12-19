@@ -174,6 +174,13 @@ func Text(i interface{}) Element {
 	}
 }
 
+func Textf(template string, i interface{}) Element {
+	return Element{
+		Tag:  text,
+		Text: fmt.Sprintf(template, i),
+	}
+}
+
 // Nothing generates a blank element.  The only reason we have the arguments
 // is to make the funciton type signature the same as the other construction
 // functions
