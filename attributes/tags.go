@@ -46,6 +46,7 @@ const (
 	cellSpacing = "cellspacing"
 	border      = "border"
 	align       = "align"
+	vAlign      = "valign"
 
 	viewBox        = "viewBox" //yes, camel case is correct
 	stroke         = "stroke"
@@ -299,6 +300,10 @@ func Border(pixels int) Attribute {
 
 func Align(s string) Attribute {
 	return regularAttribute(align, s)
+}
+
+func VAlign(s string) Attribute {
+	return regularAttribute(vAlign, s)
 }
 
 func ViewBox(s string) Attribute {
