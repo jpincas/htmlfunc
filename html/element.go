@@ -189,6 +189,22 @@ func (el Element) RenderIfWithDefault(doRender bool, d Element) Element {
 	return d
 }
 
+func (el *Element) AppendAttrs(attrs ...attributes.Attribute) {
+	el.Attributes = append(el.Attributes, attrs...)
+}
+
+func (els Elements) AppendAttrs(attrs ...attributes.Attribute) {
+	for i := range els {
+		els[i].AppendAttrs(attrs...)
+	}
+}
+
+func ElementsAppendAttrs(els []Element, attrs ...attributes.Attribute) {
+	for i := range els {
+		els[i].AppendAttrs(attrs...)
+	}
+}
+
 // Join separates HTML elements with the specifid separator
 func (els Elements) Join(sep Element) (res Elements) {
 	for _, el := range els {
