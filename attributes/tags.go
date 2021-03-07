@@ -84,6 +84,10 @@ const (
 	Blank = "_blank"
 )
 
+func Custom(tagName, s string) Attribute {
+	return regularAttribute(tagName, s)
+}
+
 func Style(styles ...css.KeyValuePair) Attribute {
 
 	includedStyles := []css.KeyValuePair{}
