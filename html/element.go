@@ -89,6 +89,11 @@ func (el Element) DocStringWithOptions(docOptions string) string {
 	return fmt.Sprintf("<!DOCTYPE html %s>\n%s", docOptions, renderedElement)
 }
 
+func (el Element) Write(w io.Writer) error {
+	_, err := w.Write(el.Bytes())
+	return err
+}
+
 func (el Element) WriteDoc(w io.Writer) error {
 	_, err := w.Write(el.DocBytes())
 	return err
@@ -103,6 +108,11 @@ const (
 	contentType = "Content-Type"
 	textHtml    = "text/html; charset=utf-8"
 )
+
+func (el Element) Serve(w http.ResponseWriter) error {
+	w.Header().Set(contentType, textHtml)
+	return el.Write(w)
+}
 
 func (el Element) ServeDoc(w http.ResponseWriter) error {
 	w.Header().Set(contentType, textHtml)
