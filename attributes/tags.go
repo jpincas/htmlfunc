@@ -77,6 +77,7 @@ const (
 	pattern  = "pattern"
 	required = "required"
 	value    = "value"
+	max      = "max"
 )
 
 const (
@@ -152,6 +153,10 @@ func Pattern(s string) Attribute {
 
 func Value(s string) Attribute {
 	return regularAttribute(value, s)
+}
+
+func Max(s string) Attribute {
+	return regularAttribute(max, s)
 }
 
 func Data(suffix, s string) Attribute {
