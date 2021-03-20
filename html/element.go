@@ -176,6 +176,12 @@ func RawElement(b []byte) Element {
 	}
 }
 
+func RawElementFromString(s string) Element {
+	return Element{
+		Raw: s,
+	}
+}
+
 // Els is a handy constructor to create a list of elements
 func Els(els ...Element) Elements {
 	return els
