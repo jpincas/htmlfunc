@@ -41,6 +41,7 @@ const (
 	alignItems     = "align-items"
 	textAlign      = "text-align"
 	textDecoration = "text-decoration"
+	textTransform  = "text-transform"
 	flexWrap       = "flex-wrap"
 	lineHeight     = "line-height"
 
@@ -106,6 +107,10 @@ const (
 	TextBottom = "text-bottom"
 	Initial    = "initial"
 	Inherit    = "inherit"
+
+	Capitalize = "capitalize"
+	Uppercase  = "uppercase"
+	Lowercase  = "lowercase"
 
 	Fixed = "fixed"
 )
@@ -351,6 +356,10 @@ func TextAlign(s string, include ...bool) KeyValuePair {
 
 func TextDecoration(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(textDecoration, s, include...)
+}
+
+func TextTransform(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(textTransform, s, include...)
 }
 
 func PageBreakBefore(s string, include ...bool) KeyValuePair {
