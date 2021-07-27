@@ -19,6 +19,7 @@ const (
 	meta     = "meta"
 	link     = "link"
 	script   = "script"
+	noScript = "noscript"
 	a        = "a"
 	i        = "i"
 	nav      = "nav"
@@ -170,6 +171,10 @@ func Link(attrs attributes.Attributes) Element {
 
 func Script(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(script, attrs, elements)
+}
+
+func NoScript(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(noScript, attrs, elements)
 }
 
 func Text(i interface{}) Element {
