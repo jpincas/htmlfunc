@@ -54,6 +54,7 @@ const (
 	header   = "header"
 	form     = "form"
 	input    = "input"
+	textarea = "textarea"
 	label    = "label"
 )
 
@@ -71,6 +72,10 @@ func Header(attrs attributes.Attributes, elements ...Element) Element {
 
 func Form(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(form, attrs, elements)
+}
+
+func TextArea(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(textarea, attrs, elements)
 }
 
 func Input(attrs attributes.Attributes) Element {
