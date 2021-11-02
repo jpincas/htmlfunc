@@ -56,6 +56,8 @@ const (
 	fill           = "fill"
 	d              = "d"
 	points         = "points"
+	rows           = "rows"
+	for_           = "for"
 
 	x  = "x"
 	rx = "rx"
@@ -112,6 +114,10 @@ func Style1(style css.KeyValuePair, styles ...css.KeyValuePair) Attribute {
 
 func Class(s string) Attribute {
 	return regularAttribute(class, s)
+}
+
+func For(s string) Attribute {
+	return regularAttribute(for_, s)
 }
 
 // ClassIf is a shortcut for Class().RenderIf()
@@ -305,6 +311,10 @@ func CellSpacing(pixels int) Attribute {
 
 func Border(pixels int) Attribute {
 	return intAttribute(border, pixels)
+}
+
+func Rows(n int) Attribute {
+	return intAttribute(rows, n)
 }
 
 func Align(s string) Attribute {
