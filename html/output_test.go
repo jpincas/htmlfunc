@@ -41,6 +41,10 @@ func TestOutput(t *testing.T) {
 			H1(attributes.Attrs(), Text("H1")),
 			H2(attributes.Attrs(), Text("H2")),
 		),
+		TextArea(
+			attributes.Attrs(),
+			Text("Hopefully no strange gaps"),
+		),
 		P(
 			attributes.Attrs(),
 			Text("this shouldn't render"),
@@ -70,6 +74,7 @@ func TestOutput(t *testing.T) {
       H2
     </h2>
   </div>
+  <textarea>Hopefully no strange gaps</textarea>
   this should get rendered by default
   <notarealtag>Hello, World</notarealtag>
 </div>

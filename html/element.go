@@ -41,6 +41,19 @@ func (el Element) Output(tabs int) (string, bool) {
 		return fmt.Sprintf("%s%s\n", t, template.HTMLEscapeString(el.Text)), true
 	}
 
+	// Textareas are a corner case - you can't add the line break or the tab
+	if el.Tag == textarea {
+		return fmt.Sprintf(
+			"%s<%s%s>%s</%s>\n",
+			t,
+			el.Tag,
+			el.Attributes.Output(),
+			el.Elements.OutputTextAreaContent(),
+			el.Tag,
+		), true
+
+	}
+
 	if el.IsSelfClosing {
 		return fmt.Sprintf(
 			"%s<%s%s>\n",
@@ -146,6 +159,22 @@ func (els Elements) Output(tabs int) string {
 
 func (els Elements) String() string {
 	return els.Output(0)
+}
+
+// OutputTextAreaContent is to do with a special case for Text Areas where you don't want to include the usual tabs and line breaks
+func (els Elements) OutputTextAreaContent() string {
+	// Text boxes should have only a single text element
+	if len(els) == 0 {
+		return ""
+	}
+
+	el := els[0]
+	if el.Tag != text {
+		return ""
+	}
+
+	// Just return the text with no tabs or line breaks
+	return el.Text
 }
 
 func renderNTabs(n int) (res string) {
