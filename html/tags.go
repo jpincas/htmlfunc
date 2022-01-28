@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jpincas/htmlfunc/attributes"
+	"github.com/jpincas/htmlfunc/css"
 )
 
 const (
@@ -189,11 +190,35 @@ func Text(i interface{}) Element {
 	}
 }
 
+// Some text helpers
+
 func Textf(template string, i interface{}) Element {
 	return Element{
 		Tag:  text,
 		Text: fmt.Sprintf(template, i),
 	}
+}
+
+func BoldText(i interface{}) Element {
+	return Span(
+		attributes.Attrs(
+			attributes.Style(
+				css.FontWeight(css.Bold),
+			),
+		),
+		Text(i),
+	)
+}
+
+func ItalicText(i interface{}) Element {
+	return Span(
+		attributes.Attrs(
+			attributes.Style(
+				css.FontStyle(css.Italic),
+			),
+		),
+		Text(i),
+	)
 }
 
 // Nothing generates a blank element.  The only reason we have the arguments

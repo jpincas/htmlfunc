@@ -19,6 +19,7 @@ const (
 	fontFamily = "font-family"
 	fontSize   = "font-size"
 	fontWeight = "font-weight"
+	fontStyle  = "font-style"
 
 	width    = "width"
 	height   = "height"
@@ -76,7 +77,8 @@ const (
 	Rem     = "rem"
 	Vh      = "vh"
 
-	Bold = "bold"
+	Bold   = "bold"
+	Italic = "italic"
 
 	Block        = "block"
 	Inline       = "inline"
@@ -243,6 +245,10 @@ func FontSize(s string, include ...bool) KeyValuePair {
 
 func FontWeight(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(fontWeight, s, include...)
+}
+
+func FontStyle(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(fontStyle, s, include...)
 }
 
 func JustifyContent(s string, include ...bool) KeyValuePair {
