@@ -77,8 +77,9 @@ const (
 	Rem     = "rem"
 	Vh      = "vh"
 
-	Bold   = "bold"
-	Italic = "italic"
+	Bold      = "bold"
+	Italic    = "italic"
+	Underline = "underline"
 
 	Block        = "block"
 	Inline       = "inline"
