@@ -251,7 +251,7 @@ func ElementsAppendAttrs(els []Element, attrs ...attributes.Attribute) {
 }
 
 func ElementsAppendAttrsNotLast(els []Element, attrs ...attributes.Attribute) {
-	for i := 0; i < len(attrs)-1; i++ {
+	for i := 0; i < len(els)-1; i++ {
 		els[i].AppendAttrs(attrs...)
 	}
 }
