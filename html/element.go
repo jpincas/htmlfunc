@@ -250,6 +250,12 @@ func ElementsAppendAttrs(els []Element, attrs ...attributes.Attribute) {
 	}
 }
 
+func ElementsAppendAttrsNotLast(els []Element, attrs ...attributes.Attribute) {
+	for i := 0; i < len(attrs)-1; i++ {
+		els[i].AppendAttrs(attrs...)
+	}
+}
+
 // Join separates HTML elements with the specifid separator
 func (els Elements) Join(sep Element) (res Elements) {
 	for _, el := range els {
@@ -285,13 +291,13 @@ func (el Element) IsEmpty() bool {
 	return el.Text == "" && len(el.Elements) == 0
 }
 
-//Els1 is a convenience function to combine a single element then a list (which you can't do with
+// Els1 is a convenience function to combine a single element then a list (which you can't do with
 // the standard spread syntax)
 func Els1(el Element, els Elements) Elements {
 	return append(Els(el), els...)
 }
 
-//Els2 is a convenience function to combine two single elements, then a list (which you can't do with
+// Els2 is a convenience function to combine two single elements, then a list (which you can't do with
 // the standard spread syntax)
 func Els2(el1, el2 Element, els Elements) Elements {
 	return append(Els(el1, el2), els...)
