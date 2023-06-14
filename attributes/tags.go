@@ -80,6 +80,9 @@ const (
 	required = "required"
 	value    = "value"
 	max      = "max"
+
+	minLength = "minlength"
+	maxLength = "maxlength"
 )
 
 const (
@@ -275,6 +278,14 @@ func Async(b bool) Attribute {
 
 func Required(b bool) Attribute {
 	return booleanAttribute(required, b)
+}
+
+func MinLength(n int) Attribute {
+	return intAttribute(minLength, n)
+}
+
+func MaxLength(n int) Attribute {
+	return intAttribute(maxLength, n)
 }
 
 func Disabled(b bool) Attribute {
