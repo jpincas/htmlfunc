@@ -57,10 +57,15 @@ const (
 	input    = "input"
 	textarea = "textarea"
 	label    = "label"
+	main     = "main"
 )
 
 func Div(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(div, attrs, elements)
+}
+
+func Main(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(main, attrs, elements)
 }
 
 func Progress(attrs attributes.Attributes, elements ...Element) Element {
