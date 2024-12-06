@@ -83,6 +83,10 @@ const (
 
 	minLength = "minlength"
 	maxLength = "maxlength"
+
+	onKeyUp  = "onkeyup"
+	onChange = "onchange"
+	selected = "selected"
 )
 
 const (
@@ -414,4 +418,16 @@ func R(i int) Attribute {
 
 func ColSpan(i int) Attribute {
 	return intAttribute(colSpan, i)
+}
+
+func OnKeyUp(s string) Attribute {
+	return regularAttribute(onKeyUp, s)
+}
+
+func OnChange(s string) Attribute {
+	return regularAttribute(onChange, s)
+}
+
+func Selected(b bool) Attribute {
+	return booleanAttribute(selected, b)
 }
