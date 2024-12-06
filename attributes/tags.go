@@ -87,6 +87,10 @@ const (
 	onKeyUp  = "onkeyup"
 	onChange = "onchange"
 	selected = "selected"
+
+	size     = "size"
+	multiple = "multiple"
+	cols     = "cols"
 )
 
 const (
@@ -430,4 +434,16 @@ func OnChange(s string) Attribute {
 
 func Selected(b bool) Attribute {
 	return booleanAttribute(selected, b)
+}
+
+func Size(n int) Attribute {
+	return intAttribute(size, n)
+}
+
+func Multiple(b bool) Attribute {
+	return booleanAttribute(multiple, b)
+}
+
+func Cols(n int) Attribute {
+	return intAttribute(cols, n)
 }
