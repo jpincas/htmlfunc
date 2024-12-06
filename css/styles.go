@@ -61,6 +61,7 @@ const (
 	tableLayout   = "table-layout"
 
 	pageBreakBefore = "page-break-before"
+	transform       = "transform"
 )
 
 const (
@@ -379,4 +380,8 @@ func VerticalAlign(s string, include ...bool) KeyValuePair {
 
 func TableLayout(s string, include ...bool) KeyValuePair {
 	return constructKeyValuePair(tableLayout, s, include...)
+}
+
+func Transform(s string, include ...bool) KeyValuePair {
+	return constructKeyValuePair(transform, s, include...)
 }

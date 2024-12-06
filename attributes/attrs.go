@@ -9,8 +9,9 @@ import (
 // Attribue
 
 type Attribute struct {
-	Name, Val string
-	IsBool    bool
+	Name, Val              string
+	IsBool                 bool
+	RenderWithSingleQuotes bool
 }
 
 func (attr Attribute) Output() string {
@@ -23,7 +24,12 @@ func (attr Attribute) Output() string {
 		return attr.Name
 	}
 
-	return fmt.Sprintf(`%s="%s"`, attr.Name, attr.Val)
+	quote := `"`
+	if attr.RenderWithSingleQuotes {
+		quote = `'`
+	}
+
+	return fmt.Sprintf(`%s=%s%s%s`, attr.Name, quote, attr.Val, quote)
 }
 
 func (attr Attribute) String() string {
@@ -72,13 +78,13 @@ func Attrs(attrs ...Attribute) Attributes {
 	return attrs
 }
 
-//Attrs1 is a convenience function to combine a single element then a list (which you can't do with
+// Attrs1 is a convenience function to combine a single element then a list (which you can't do with
 // the standard spread syntax)
 func Attrs1(attr Attribute, attrs Attributes) Attributes {
 	return append(Attrs(attr), attrs...)
 }
 
-//Attrs2 is a convenience function to combine two single elements, then a list (which you can't do with
+// Attrs2 is a convenience function to combine two single elements, then a list (which you can't do with
 // the standard spread syntax)
 func Attrs2(attr1, attr2 Attribute, attrs Attributes) Attributes {
 	return append(Attrs(attr1, attr2), attrs...)
@@ -126,6 +132,15 @@ func regularAttribute(k, v string) Attribute {
 		Name:   k,
 		Val:    v,
 		IsBool: false,
+	}
+}
+
+func regularAttributeWithSingleQuotes(k, v string) Attribute {
+	return Attribute{
+		Name:                   k,
+		Val:                    v,
+		IsBool:                 false,
+		RenderWithSingleQuotes: true,
 	}
 }
 

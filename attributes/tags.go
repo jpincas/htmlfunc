@@ -273,7 +273,7 @@ func Media(s string) Attribute {
 }
 
 func OnLoad(s string) Attribute {
-	return regularAttribute(onload, s)
+	return regularAttributeWithSingleQuotes(onload, s)
 }
 
 func Defer(b bool) Attribute {
@@ -317,7 +317,7 @@ func Height(s string) Attribute {
 }
 
 func OnClick(s string) Attribute {
-	return regularAttribute(onclick, s)
+	return regularAttributeWithSingleQuotes(onclick, s)
 }
 
 func CellPadding(pixels int) Attribute {
@@ -425,11 +425,11 @@ func ColSpan(i int) Attribute {
 }
 
 func OnKeyUp(s string) Attribute {
-	return regularAttribute(onKeyUp, s)
+	return regularAttributeWithSingleQuotes(onKeyUp, s)
 }
 
 func OnChange(s string) Attribute {
-	return regularAttribute(onChange, s)
+	return regularAttributeWithSingleQuotes(onChange, s)
 }
 
 func Selected(b bool) Attribute {
