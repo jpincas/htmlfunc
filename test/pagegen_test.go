@@ -17,66 +17,56 @@ import (
 // - run test, then: /usr/local/bin/vnu-runtime-image/bin/vnu index.html
 // - inspect the generated HTML in a browser
 
+// This page is also a good example of how to write HTML using htmlfunc that can be presented to an AI
+// It also serves as a style guide for how to format the code nicely following these guidelines:
+// - The a.Attrs() function should be open on the same line as the HTML tag
+// - The a.Attrs() function should be closed on the same line as the last attribute
+// - Each attribute should be on its own line
+// - Each HTML tag should be on its own line
+// - Each HTML tag should be indented by one tab
+// - Each HTML tag should be closed on its own line
+
 func TestPageGen(t *testing.T) {
 	content :=
-		h.Div(
-			a.Attrs(
-				a.Id("test-id"),
-				a.Class("test-class"),
-			),
-			h.P(
-				a.Attrs(
-					a.Id("nested-id"),
-					a.Class("nested-class"),
-				),
-				h.Text("Here is some content"),
-			),
-		)
+		h.Div(a.Attrs(
+			a.Id("test-id"),
+			a.Class("test-class")),
+			h.P(a.Attrs(
+				a.Id("nested-id"),
+				a.Class("nested-class")),
+				h.Text("Here is some content")))
 
 	head :=
-		h.Head(
-			a.Attrs(),
-
-			// Title is required - validator will fail without it
-			h.Title(a.Attrs(), html.Text("Test Document")),
-			h.Meta(a.Attrs(a.Charset("UTF-8"))),
-			h.Meta(a.Attrs(a.Name("viewport"), a.Content("width=device-width, initial-scale=1.0"))),
-			h.Meta(a.Attrs(a.HttpEquiv("X-UA-Compatible"), a.Content("ie=edge"))),
-		)
+		h.Head(a.Attrs(),
+			h.Title(a.Attrs(),
+				html.Text("Test Document")),
+			h.Meta(a.Attrs(
+				a.Charset("UTF-8"))),
+			h.Meta(a.Attrs(
+				a.Name("viewport"),
+				a.Content("width=device-width, initial-scale=1.0"))),
+			h.Meta(a.Attrs(
+				a.HttpEquiv("X-UA-Compatible"),
+				a.Content("ie=edge"))))
 
 	table :=
-		h.Table(
-			a.Attrs(),
-			h.Tr(
-				a.Attrs(
-					a.Class("class1"),
-					a.Class("class2"),
-				),
-				h.Td(
-					a.Attributes{
-						a.Style(),
-					},
-				),
-			),
-		)
+		h.Table(a.Attrs(),
+			h.Tr(a.Attrs(
+				a.Class("class1"),
+				a.Class("class2")),
+				h.Td(a.Attributes{
+					a.Style()})))
 
 	body :=
-		h.Body(
-			a.Attrs(
-				a.Class("body-class"),
-
-				// Repeated 'style' declaration will fail if not dealt with
-				a.Style(
-					css.Width(css.WithUnits(50, css.Px)),
-				),
-				a.Style(
-					css.Color("white", false),
-					css.FontSize(css.WithUnits(150, css.Px), true),
-				),
-			),
+		h.Body(a.Attrs(
+			a.Class("body-class"),
+			a.Style(
+				css.Width(css.WithUnits(50, css.Px))),
+			a.Style(
+				css.Color("white", false),
+				css.FontSize(css.WithUnits(150, css.Px), true))),
 			content,
-			table,
-		)
+			table)
 
 	el :=
 		h.Html(
