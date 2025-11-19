@@ -60,6 +60,8 @@ const (
 	main      = "main"
 	selectTag = "select"
 	option    = "option"
+	details   = "details"
+	summary   = "summary"
 )
 
 func Div(attrs attributes.Attributes, elements ...Element) Element {
@@ -306,4 +308,12 @@ func Select(attrs attributes.Attributes, elements ...Element) Element {
 
 func Option(attrs attributes.Attributes, elements ...Element) Element {
 	return basicTag(option, attrs, elements)
+}
+
+func Details(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(details, attrs, elements)
+}
+
+func Summary(attrs attributes.Attributes, elements ...Element) Element {
+	return basicTag(summary, attrs, elements)
 }
