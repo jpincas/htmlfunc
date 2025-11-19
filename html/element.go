@@ -211,6 +211,10 @@ func RawElementFromString(s string) Element {
 	}
 }
 
+func UnsafeRaw(s string) Element {
+	return RawElementFromString(s)
+}
+
 // Els is a handy constructor to create a list of elements
 func Els(els ...Element) Elements {
 	return els
